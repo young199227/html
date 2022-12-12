@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/mycolor.css">
+
+    <style>
+
+        img{
+            width: 150px;
+        }
+
+        @media screen and (max-width: 768px){
+
+            .table-rwd thead{
+                display: none;
+            }
+            
+            .table-rwd tbody tr{
+                display: block;
+                border: 2px solid var(--grey01);
+                margin-top: 15px;
+            }
+
+            .table-rwd tbody tr td{
+                display: block;
+
+                color: var(--blue01);
+                overflow: hidden;
+            }
+
+
+            .table-rwd tbody tr td:before{
+                content: attr(data-th)" : ";
+                color: var(--green02);
+                font-weight: bolder;
+                display: block;
+                float: left;
+                width: 15%;
+            }
+
+            .table-rwd tbody tr td span.table-col{
+                display: block;
+                float: left;
+                width: 85%;
+            }
+        }
+        
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <table class="table table-bordered  table-hover table-sm caption-top table-rwd">
+            <caption>點餐時間!</caption>
+            <thead class="table-dark">
+                <tr>
+                    <th>編號</th>
+                    <th>圖片</th>
+                    <th>品名</th>
+                    <th>單價</th>
+                    <th>數量</th>
+                    <th>規格</th>
+                    <th>備註</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-th="編號"><span class="table-col">001</span></td>
+                    <td data-th="圖片"><span class="table-col"><img src="imges/111.jpg" alt=""></span></td>
+                    <td data-th="品名"><span class="table-col">超大雞腿飯</span></td>
+                    <td data-th="單價"><span class="table-col">100</span></td>
+                    <td data-th="數量"><span class="table-col">1</span></td>
+                    <td data-th="規格"><span class="table-col">超大!</span></td>
+                    <td data-th="備註"><span class="table-col">不好吃不好吃不好吃不好吃不好吃不好吃不好吃不好吃不好吃不好吃不好吃不好吃不好吃不好吃不好吃不好吃不好吃不好吃不好吃不好吃不好吃不好吃不好吃不好吃不好吃</span></td>
+                </tr>
+                <tr>
+                    <td data-th="編號">002</td>
+                    <td data-th="圖片"><span class="table-col"><img src="imges/111.jpg" alt=""></span></td>
+                    <td data-th="編號">豬排飯</td>
+                    <td data-th="編號">150</td>
+                    <td data-th="編號">9</td>
+                    <td data-th="編號">超小</td>
+                    <td data-th="編號">好吃</td>
+                </tr>
+                <tr>
+                    <td data-th="編號">001</td>
+                    <td data-th="圖片"><span class="table-col"><img src="imges/111.jpg" alt=""></span></td>
+                    <td data-th="編號">超大雞腿飯</td>
+                    <td data-th="編號">100</td>
+                    <td data-th="編號">1</td>
+                    <td data-th="編號">超大!</td>
+                    <td data-th="編號">不好吃</td>
+                </tr>
+                <tr>
+                    <td>001</td>
+                    <td>超大雞腿飯</td>
+                    <td>100</td>
+                    <td>1</td>
+                    <td>超大!</td>
+                    <td>不好吃</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/mycolor.css">
+
+    <style>
+        body {
+            font-family: naikaifont;
+        }
+
+        .box {
+            border: 4px solid var(--black);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            text-align: center;
+            /* font-size: 25px; */
+            /* height: 500px; */
+        }
+
+
+        .box img {
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        .box:hover{
+            border: 4px solid var(--pink);
+            background-color: var(--pink);
+            color: var(--white);
+
+        }
+
+        .box:hover .mybtn{
+            border: 3px solid var(--white);
+            background-color: var(--pink);
+            color: var(--white);
+
+        }
+
+        .box .mybtn {
+
+            border: 3px solid var(--black);
+            border-radius: 10px;
+
+            text-decoration: none;
+            color: var(--black);
+            /* width: 30%; */
+            padding: 3px;
+
+            margin-top: 0px;
+            margin-bottom: 0px;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+
+    </style>
+    <title>台灣鄉村美食</title>
+</head>
+
+
+<body>
+
+
+    <div class="container">
+        <div class="row" id="show">
+
+            <!-- <div class="col-sm-6 col-md-4 col-xl-3  mt-3">
+                <div class="box d-flex flex-column h-100">
+                    <img src="https://ezgo.coa.gov.tw/Uploads/opendata/TainmaMain01/APPLY_D/20151007173924.jpg">
+                    <h3>店名:湖莓宴餐坊</h3>
+                        <p>電話:037-995677</p>
+                        <p>地址:苗栗縣大湖鄉富興村八寮彎2-7號</p>
+
+                        <a href="" class="mybtn mt-auto">詳細資料</a>
+                </div>
+            </div> -->
+
+        </div>
+    </div>
+
+
+
+</body>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/jquery-3.6.1.min.js"></script>
+<script>
+
+    $(function () {
+        $.ajax({
+            type: "GEt",
+            url: "/json/ODwsvTravelFood.json",
+            success: showdata,
+            error: function () {
+                alert(0);
+            }
+        });
+    });
+
+    function showdata(data) {
+        for (i = 0; i <data.length; i++) {
+
+            $("#show").append(
+
+                "<div class='col-sm-6 col-md-4 col-xl-3 mt-3 gx-3'>" +
+                 "<div class='box d-flex flex-column h-100'>" +
+                  "<img src='" + data[i].PicURL + "'>" +
+                  "<h3 class='mt-2'>店名:" + data[i].Name + "</h3>" +
+                  "<p>電話:" + data[i].Tel + "</p>" +
+                  "<p>地址:" + data[i].Address + "</p>" +
+                  "<a href='' class='mybtn mt-auto'>詳細資料</a>"+
+                 "</div>" +
+                "</div>"
+
+            );
+        }
+    }
+
+
+</script>
+
+</html>

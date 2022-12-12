@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/mycolor.css">
+    <title>撈水豚</title>
+
+    <style>
+        body {
+            background-color: rgb(61, 61, 61);
+        }
+
+        table {
+            font-family: naikaifont;
+            text-align: center;
+            color: #fff;
+        }
+
+        th {
+            color: #fff;
+            font-size: 25px;
+        }
+
+        td {
+            color: #fff;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="row mt-5">
+            <div class="col-2">
+                <input type="text" class="form-control" id="username" placeholder="帳號">
+            </div>
+            <div class="col-2">
+                <input type="password" class="form-control" id="password" placeholder="密碼">
+            </div>
+            <div class="col-2">
+                <input type="text" class="form-control" id="nickname" placeholder="暱稱">
+            </div>
+            <div class="col-2">
+                <input type="text" class="form-control" id="height" placeholder="身高">
+            </div>
+            <div class="col-2">
+                <input type="text" class="form-control" id="weight" placeholder="體重">
+            </div>
+            <div class="col-2">
+                <button type="submit" id="submituser" class="btn btn-primary mb-3">新增會員</button>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-12">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">會員編號</th>
+                            <th scope="col">帳號</th>
+                            <th scope="col">暱稱</th>
+                            <th scope="col">身高</th>
+                            <th scope="col">體重</th>
+                            <th scope="col">註冊時間</th>
+                        </tr>
+
+                    </thead>
+                    <tbody id="show">
+
+
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/jquery-3.6.1.min.js"></script>
+
+<script>
+
+    $(function () {
+
+        getajax();
+
+        $("#submituser").click(function () {
+
+            if($("#username").val()==""||$("#password").val()==""||$("#nickname").val()==""||$("#height").val()==""||$("#weight").val()==""){
+                alert("內容不能空");
+                return;
+            }
+
+            adduser();
+        });
+
+    });
+
+    function getajax() {
+
+
+        $.ajax({
+            type: "GET",
+            url: "/phptest/user01_select01.php",
+            dataType: "json",
+            success: function (data) {
+
+                $("#show").empty();
+
+                for (i = 0; i < data.length; i++) {
+
+                    $("#show").append(
+                        '<tr>' +
+                        '<td>' + data[i].ID + '</td>' +
+                        '<td>' + data[i].Username + '</td>' +
+                        '<td>' + data[i].Nickname + '</td>' +
+                        '<td>' + data[i].Height + '</td>' +
+                        '<td>' + data[i].Weight + '</td>' +
+                        '<td>' + data[i].Created_at + '</td>' +
+                        '</tr>'
+                    );
+                }
+            }
+        });
+    }
+
+
+    function adduser() {
+
+        $.ajax({
+
+            type: "POST",
+            url: "/phptest/user01_insert01.php",
+            data: {
+                "username": $("#username").val(),
+                "password": $("#password").val(),
+                "nickname": $("#nickname").val(),
+                "height": $("#height").val(),
+                "weight": $("#weight").val()
+            },
+            success: function () {
+
+                $("#username,#password,#nickname,#height,#weight").each(function () {
+                    $(this).val("");
+                });
+
+                getajax();
+            },
+            error: function () {
+                console.log("沒成功");
+            }
+
+        });
+    }
+
+
+
+
+
+
+</script>
+
+</html>

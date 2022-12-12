@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/mycolor.css">
+    <title>Document</title>
+    <style>
+        /* #err_username{
+            color: red;
+        } */
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+
+                        <form>
+
+                            <div class="">
+
+                                <label for="">帳號</label>
+                                <input type="text" id="username" class="form-control" placeholder="5-12字">
+                                <div class="form-text" id="err_username"></div>
+
+                                <label for="">密碼</label>
+                                <input type="password" id="userpassword" class="form-control" placeholder="8-12字">
+                                <div class="form-text" id="err_userpassword"></div>
+
+                                <label for="">暱稱</label>
+                                <input type="text" id="usergy" class="form-control" placeholder="5-12字">
+                                <div class="form-text" id="err_usergy"></div>
+
+                                <label for="">身高</label>
+                                <input type="number" id="usercm" class="form-control" placeholder="80-200" min="80"
+                                    max="200">
+                                <div class="form-text" id="err_usercm"></div>
+
+                                <label for="">體重</label>
+                                <input type="number" id="userkg" class="form-control" placeholder="5-120" min="5"
+                                    max="120">
+                                <div class="form-text" id="err_userkg"></div>
+
+                            </div>
+
+                            <div class="text-center mt-3">
+
+                                <button type="button" class="btn btn-dark" id="die">清空</button>
+                                <button type="button" class="btn btn-primary" id="ok">新增</button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 offset-md-3">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>帳號</th>
+                            <th>密碼</th>
+                            <th>暱稱</th>
+                            <th>身高</th>
+                            <th>體重</th>
+                        </tr>
+                    </thead>
+                    <tbody id="show">
+                        <tr>
+
+                        </tr>
+                    </tbody>
+
+                </table>
+                <h1></h1>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="../js/jquery-3.6.1.min.js"></script>
+
+<script>
+
+    const ggyy = /^(?=.*\d)(?=.*[a-zA-Z]).{6,20}$/;
+
+    var flag_username = false;
+    var flag_userpassword = false;
+    var flag_usergy = false;
+    var flag_usercm = false;
+    var flag_userkg = false;
+
+    //#ok按鈕 click事件
+    $("#ok").click(function () {
+        console.log($("#username").val());
+        console.log($("#userpassword").val());
+        console.log($("#usergy").val());
+        console.log($("#usercm").val());
+        console.log($("#userkg").val());
+
+        if (flag_username && flag_userpassword && flag_usergy && flag_usercm && flag_userkg) {
+
+            $.ajax({
+                type: "POST",
+                url: "user01_insert01.php",
+                data: {
+                    username: $("#username").val(),
+                    password: $("#userpassword").val(),
+                    nickname: $("#usergy").val(),
+                    height: $("#usercm").val(),
+                    weight: $("#userkg").val()
+                },
+                success: function (data) {
+
+                    console.log(data);
+                    // for (i = 0; i < data.length; i++) {
+
+                    //     $("#show").append(
+                    //         '<tr>' +
+                    //         '<td>' + data[i].username + '</td>' +
+                    //         '<td>' + data[i].password + '</td>' +
+                    //         '<td>' + data[i].nickname + '</td>' +
+                    //         '<td>' + data[i].height + '</td>' +
+                    //         '<td>' + data[i].weight + '</td>' +
+                    //         '</tr>'
+
+                    //     );
+
+                    // }
+
+                },
+                error: function () {
+                    console.log("失敗");
+                }
+            });
+
+        } else {
+
+            console.log("失敗");
+            alert("請檢查表單內容");
+        }
+    });
+
+    //#die按鈕 click事件
+    $("#die").click(function () {
+        $("#username,#userpassword,#usergy,#usercm,#userkg").val("");
+        $("#err_username,#err_userpassword,#err_usergy,#err_usercm,#err_userkg").html("");
+    });
+
+    //表單文字監聽
+    $("#username").keyup(function () {
+
+        if ($("#username").val().length < 5 || $("#username").val().length > 12) {
+
+            $("#err_username").html("字數不符合規則:5-12字");
+            $("#err_username").css("color", "red");
+            flag_username = false;
+        } else {
+
+            $("#err_username").html("字數符合規則");
+            $("#err_username").css("color", "green");
+            flag_username = true;
+        }
+
+    })
+
+    $("#userpassword").keyup(function () {
+
+        if ($("#userpassword").val().length < 8 || $("#userpassword").val().length > 12) {
+
+            $("#err_userpassword").html("字數不符合規則:8-12字");
+            $("#err_userpassword").css("color", "red");
+
+            flag_userpassword = false;
+        } else {
+
+            $("#err_userpassword").html("字數符合規則");
+            $("#err_userpassword").css("color", "green");
+            flag_userpassword = true;
+        }
+    })
+
+    $("#usergy").keyup(function () {
+
+        if ($("#usergy").val().length < 5 || $("#usergy").val().length > 12) {
+
+            $("#err_usergy").html("字數不符合規則:5-12字");
+            $("#err_usergy").css("color", "red");
+            flag_usergy = false;
+        } else {
+
+            $("#err_usergy").html("字數符合規則");
+            $("#err_usergy").css("color", "green");
+            flag_usergy = true;
+        }
+    })
+
+    $("#usercm").keyup(function () {
+
+        if ($("#usercm").val() < 80 || $("#usercm").val() > 200) {
+
+            $("#err_usercm").html("身高不符合規則:80-200");
+            $("#err_usercm").css("color", "red");
+            flag_usercm = false;
+        } else {
+
+            $("#err_usercm").html("身高符合規則");
+            $("#err_usercm").css("color", "green");
+            flag_usercm = true;
+        }
+    })
+
+    $("#userkg").keyup(function () {
+
+        if ($("#userkg").val() < 5 || $("#userkg").val() > 120) {
+
+            $("#err_userkg").html("體重不符合規則:5-120");
+            $("#err_userkg").css("color", "red");
+            flag_userkg = false;
+        } else {
+
+            $("#err_userkg").html("體重符合規則");
+            $("#err_userkg").css("color", "green");
+            flag_userkg = true;
+        }
+    })
+
+
+
+
+</script>
+
+</html>

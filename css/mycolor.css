@@ -1,0 +1,24 @@
+:root {
+    --green01: #7FB174;
+    --color2: #85B8CB;
+    --blue01: #1D6A96;
+    --color4: #283B42;
+    --color5: #D1DDDB;
+
+    --pink:#ffb3ba;
+    --pink2:#ffd3d7;
+    --pink3:#ffc5cb;
+    --pink4:#ffb3ba;
+    --black: #000;
+    --white:#fff;
+
+    --grey:#202225;
+    --grey2:#2f3136;
+    --grey3:#36393f;
+}
+
+@font-face {
+    font-family: naikaifont;
+    src: url("/fonts/NaikaiFont-Regular.woff2") format("woff2");
+    src: url("/fonts/NaikaiFont-Regular.woff") format("woff");
+  }

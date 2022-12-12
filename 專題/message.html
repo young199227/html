@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>不可以瑟瑟</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/mycolor.css">
+
+    <style>
+        .body_color {
+            background-color: var(--pink);
+            color: var(--white);
+            font-family: naikaifont;
+        }
+
+        .box {
+            background-color: var(--pink2);
+            height: 100vh;
+            text-align: center;
+        }
+
+        .box2 {
+            /* padding-top: 50px;
+            background-image: url(/imges/rule-bg.png);
+            background-size: cover;
+            background-position: center center; */
+
+            background-color: var(--pink3);
+            height: 89vh;
+            overflow: auto;
+        }
+
+        .box3 {
+            background-color: var(--pink3);
+            height: 11vh;
+        }
+
+        /* 整個捲軸 */
+        .box2::-webkit-scrollbar {
+            width: 7px;
+        }
+
+        /* 捲軸的軌道 */
+        .box2::-webkit-scrollbar-track {
+            background: rgb(240, 240, 240);
+            border-radius: 30px;
+        }
+
+        /* 滑動的區塊 */
+        .box2::-webkit-scrollbar-thumb {
+            background: rgb(166, 166, 166);
+            border-radius: 30px;
+        }
+
+        /* 滑鼠移到滑動的區塊上 */
+        .box2::-webkit-scrollbar-thumb:hover {
+            background: rgb(255, 218, 218);
+        }
+    </style>
+</head>
+
+<body class="body_color">
+
+    <div class="container">
+        <div class="row">
+
+            <!-- 好友視窗box -->
+            <div class="col-3 col-xl-2 box">
+                <div class="row flex-column align-items-start h-100">
+                    <div class="col-12">
+                        <h1 id="cloud">雲雲&#9729;</h1>
+                    </div>
+                    <div class="col-12">
+                        <h1 id="face">黑臉☺</h1>
+                    </div>
+                    <div class="col-12">
+                        <h1 id="love">愛心❤</h1>
+                    </div>
+                    <div class="col-12">
+                        <h1>施工ㄛ</h1>
+                    </div>
+                    <div class="col-12 mt-auto">
+                        <h1 id="delete">刪除☠</h1>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 聊天室窗box -->
+            <div class="col-9 col-xl-10">
+
+                <div class="row">
+
+                    <!-- 內容視窗box2 -->
+                    <div class="col-12 box2">
+                        <div class="row flex-column-reverse">
+
+                            <!-- <div class="col-12">
+
+                                <h1 id="text1">
+                                </h1>
+
+                            </div> -->
+
+                        </div>
+                    </div>
+
+                    <!-- 發送訊息視窗box3 -->
+                    <div class="col-12 box3">
+                        <div class="input-group input-group-lg mt-4">
+                            <span class="input-group-text" id="bac_color">+</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-lg" id="addmes">
+                            <button class="btn btn-outline-secondary" type="button" id="add">送出</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/jquery-3.6.1.min.js"></script>
+<script>
+
+
+    $(function () {
+
+        //雲圖案
+        $("#cloud").click(function () {
+
+            $("#addmes").each(function () {
+                $(this).val("☁");
+            });
+            addmessage();
+        });
+
+        //雲圖案
+        $("#face").click(function () {
+
+            $("#addmes").each(function () {
+                $(this).val("☺");
+            });
+            addmessage();
+        });
+
+        //雲圖案
+        $("#love").click(function () {
+
+            $("#addmes").each(function () {
+                $(this).val("❤");
+            });
+            addmessage();
+        });
+
+        //顏色變換
+        var color_onoff = 0;
+        $("#bac_color").click(function () {
+
+            if (color_onoff == 0) {
+
+                $("body").css("background-color", "#202225");
+                $(".box").css("background-color", "#2f3136");
+                $(".box2").css("background-color", "#36393f");
+                $(".box3").css("background-color", "#36393f");
+                color_onoff = 1;
+                return;
+            }
+            if (color_onoff == 1) {
+
+                $("body").css("background-color", "#ffb3ba");
+                $(".box").css("background-color", "#ffd3d7");
+                $(".box2").css("background-color", "#ffc5cb");
+                $(".box3").css("background-color", "#ffc5cb");
+                color_onoff = 0;
+                return;
+            }
+        });
+
+        //按鈕送出訊息
+        $("#add").click(function () {
+
+            addmessage();
+        });
+
+        //按Eenter送出訊息
+        $("#addmes").keypress(function (e) {
+            code = (e.keyCode ? e.keyCode : e.which);
+
+            if (code == 13) {
+                addmessage();
+            }
+        });
+
+        //按XX刪除全部訊息
+        $("#delete").click(function(){
+            deletemessage();
+        });
+    });
+
+    //進入刷新訊息
+    ajaxGte();
+
+    //ajax拿資料局部刷新
+    function ajaxGte() {
+        $.ajax({
+            type: "GET",
+            url: "/php/gethint.php",
+            success: function (data) {
+
+                $(".box2").html(data);
+                //卷軸自動置底
+                $(".box2").scrollTop($(".box2")[0].scrollHeight);
+            }
+
+        });
+    }
+
+    //ajax 不一直刷新頁面 (但還是一直GET 1秒鐘一次)
+    //一秒鐘讀取一次data長度 當長度改變時刷新頁面
+    var count = 0;
+    var count2 = 0;
+    var clock = setInterval(function () {
+        countadd();
+        if (count > count2) {
+            ajaxGte();
+            count2 = count;
+        }
+    }, 1000);
+
+    //ajax 記數
+    function countadd() {
+        $.ajax({
+            type: "GET",
+            url: "/php/gethint.php",
+            success: function (data) {
+
+                count = data.length;
+            }
+
+        });
+    }
+
+    //ajax送出訊息
+    function addmessage() {
+
+        $.ajax({
+            type: "GEt",
+            url: "/php/insert.php",
+            data: "dept_name=" + $("#addmes").val(),
+            success: ajaxGte
+        });
+
+        // 清空#addmes內的字
+        $("#addmes").each(function () {
+            $(this).val("");
+        });
+
+    }
+
+    //ajax刪除訊息
+    function deletemessage(){
+        $.ajax({
+            type:"GET",
+            url:"/php/delete.php",
+            success:function(){
+                ajaxGte();
+            }
+        });
+    }
+
+    //廢案
+    // $(".box2").append(
+
+    //     '<div class="col-12">' +
+    //     '<h1 id="text1">' +
+    //     '⇩⇩⇩新的訊息由下往上排列ㄛ 試試看⇩⇩⇩' +
+    //     '</h1>' +
+    //     '</div>'
+    // );
+</script>
+
+</html>
+
+
+<!-- <div class="row mt-2 flex-column align-items-center">
+    <div class="col-6 ">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                顏色選擇
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="color_grey">抄襲dc</a></li>
+                <li><a class="dropdown-item" id="color_pink">超級粉粉(預設)</a></li>
+            </ul>
+        </div>
+
+    </div>
+</div> -->

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/mycolor.css">
+    <title>food</title>
+
+    <style>
+        table {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-2 mt-3">
+
+                <div class="card">
+                    <div class="card-body">
+
+                        <form>
+
+                            <div class="">
+
+                                <label for="">品名</label>
+                                <input type="text" id="pname" class="form-control" placeholder="30字內">
+                                <div class="form-text" id="err_#pname"></div>
+
+                                <label for="">價錢</label>
+                                <input type="text" id="price" class="form-control" placeholder="1~你家開礦">
+                                <div class="form-text" id="err_price"></div>
+
+                                <label for="">數量</label>
+                                <input type="number" id="pnum" class="form-control" placeholder="1-10" min="1"
+                                    max="10">
+                                <div class="form-text" id="err_pnum"></div>
+
+                            </div>
+
+                            <div class="text-center mt-3">
+
+                                <button type="button" class="btn btn-dark" id="die">清空</button>
+                                <button type="button" class="btn btn-primary" id="ok">新增</button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-8 offset-2 mt-3">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>編號</th>
+                            <th>品名</th>
+                            <th>價錢</th>
+                            <th>數量</th>
+                            <th>訂購時間</th>
+                        </tr>
+                    </thead>
+                    <tbody id="show">
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/jquery-3.6.1.min.js"></script>
+
+<script>
+
+    //進入時讀取資料
+    ajaxget();
+
+
+    //按下新增 #ok click
+    $("#ok").click(function(){
+
+        var dataJson = {};
+
+        dataJson["pname"] = $("#pname").val();
+        dataJson["price"] = $("#price").val();
+        dataJson["pnum"] = $("#pnum").val();
+
+        console.log(JSON.stringify(dataJson));
+
+        $.ajax({
+
+            type:"POST",
+            url:"insert.php",
+            data:JSON.stringify(dataJson),
+            dataType:"json",
+            contentType: "application/json;chartset=utf-8",
+            success:function(data){
+                ajaxget();
+                alert(data.message);
+                console.log(data.message);
+            },
+            error:function(data){
+                
+                console.log(data.message);
+            }
+
+        });
+
+    });
+
+
+    //ajax拿資料
+    function ajaxget() {
+
+        $.ajax({
+
+            type: "post",
+            url: "select.php",
+            dataType: "json",
+            success: function (data) {
+
+                console.log(data);
+
+                $("#show").empty();
+
+                for (i = 0; i < data.data.length; i++) {
+
+                    $("#show").append(
+                        '<tr>' +
+                        '<td>' + data.data[i].ID + '</td>' +
+                        '<td>' + data.data[i].Pname + '</td>' +
+                        '<td>' + data.data[i].Price + '</td>' +
+                        '<td>' + data.data[i].Pnum + '</td>' +
+                        '<td>' + data.data[i].Created_at + '</td>' +
+                        '</tr>'
+
+                    );
+
+                }
+
+            },
+            error: function (data) {
+                console.log(data.message);
+            }
+        });
+
+    }
+
+</script>
+
+</html>

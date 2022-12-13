@@ -1,16 +1,24 @@
 <?php
 
-    if(isset($_POST["username"])&&isset($_POST["password"])&&isset($_POST["nickname"])&&isset($_POST["height"])&&isset($_POST["weight"])){
+//{"username":"123","password":"XXX","nickname":"xxx","height":"123","weight":"100"}
 
-        if($_POST["username"]!=""&&$_POST["password"]!=""&&$_POST["nickname"]!=""&&$_POST["height"]!=""&&$_POST["weight"]!=""){
+$data = file_get_contents("php://input","r");
+
+$jsonData = array();
+
+$jsonData = json_decode($data, true);
+
+
+    if(isset($jsonData["username"])&&isset($jsonData["password"])&&isset($jsonData["nickname"])&&isset($jsonData["height"])&&isset($jsonData["weight"])){
+
+        if($jsonData["username"]!=""&&$jsonData["password"]!=""&&$jsonData["nickname"]!=""&&$jsonData["height"]!=""&&$jsonData["weight"]!=""){
 
         
-
-        $p_Username = $_POST["username"];
-        $p_Password = $_POST["password"];
-        $p_Nickname = $_POST["nickname"];
-        $p_Height = $_POST["height"];
-        $p_Weight = $_POST["weight"];
+        $p_Username = $jsonData["username"];
+        $p_Password = $jsonData["password"];
+        $p_Nickname = $jsonData["nickname"];
+        $p_Height = $jsonData["height"];
+        $p_Weight = $jsonData["weight"];
 
         $servername = "localhost";
         $username = "owner";

@@ -69,17 +69,16 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>帳號</th>
-                            <th>密碼</th>
-                            <th>暱稱</th>
-                            <th>身高</th>
-                            <th>體重</th>
+                            <th scope="col">會員編號</th>
+                            <th scope="col">帳號</th>
+                            <th scope="col">暱稱</th>
+                            <th scope="col">身高</th>
+                            <th scope="col">體重</th>
+                            <th scope="col">註冊時間</th>
                         </tr>
                     </thead>
                     <tbody id="show">
-                        <tr>
 
-                        </tr>
                     </tbody>
 
                 </table>
@@ -94,6 +93,8 @@
 
 <script>
 
+    getajax();
+
     const ggyy = /^(?=.*\d)(?=.*[a-zA-Z]).{6,20}$/;
 
     var flag_username = false;
@@ -104,45 +105,47 @@
 
     //#ok按鈕 click事件
     $("#ok").click(function () {
-        console.log($("#username").val());
-        console.log($("#userpassword").val());
-        console.log($("#usergy").val());
-        console.log($("#usercm").val());
-        console.log($("#userkg").val());
+        // console.log($("#username").val());
+        // console.log($("#userpassword").val());
+        // console.log($("#usergy").val());
+        // console.log($("#usercm").val());
+        // console.log($("#userkg").val());
 
         if (flag_username && flag_userpassword && flag_usergy && flag_usercm && flag_userkg) {
+
+            //傳的資料轉成json
+            var dataJson = {};
+            dataJson["username"] = $("#username").val();
+            dataJson["password"] = $("#userpassword").val();
+            dataJson["nickname"] = $("#usergy").val();
+            dataJson["height"] = $("#usercm").val();
+            dataJson["weight"] = $("#userkg").val();
+
+
+            // JSON.stringify(dataJson);
+
+            console.log(JSON.stringify(dataJson));
 
             $.ajax({
                 type: "POST",
                 url: "user01_insert01.php",
-                data: {
-                    username: $("#username").val(),
-                    password: $("#userpassword").val(),
-                    nickname: $("#usergy").val(),
-                    height: $("#usercm").val(),
-                    weight: $("#userkg").val()
-                },
+                data: JSON.stringify(dataJson),
+                contentType: "application/json;chartset=utf-8",
+                dataType: "json",
                 success: function (data) {
 
+                    getajax();
+
                     console.log(data);
-                    // for (i = 0; i < data.length; i++) {
 
-                    //     $("#show").append(
-                    //         '<tr>' +
-                    //         '<td>' + data[i].username + '</td>' +
-                    //         '<td>' + data[i].password + '</td>' +
-                    //         '<td>' + data[i].nickname + '</td>' +
-                    //         '<td>' + data[i].height + '</td>' +
-                    //         '<td>' + data[i].weight + '</td>' +
-                    //         '</tr>'
+                    $("#username,#userpassword,#usergy,#usercm,#userkg").val("");
 
-                    //     );
+                    alert(data.message);
 
-                    // }
 
                 },
-                error: function () {
-                    console.log("失敗");
+                error: function (data) {
+                    console.log(data.message);
                 }
             });
 
@@ -238,6 +241,39 @@
     })
 
 
+    //ajax拿資料
+    function getajax() {
+
+        $.ajax({
+            type: "GET",
+            url: "/phptest/user01_select01.php",
+            dataType: "json",
+            success: function (data) {
+
+                if (data.state) {
+
+                    $("#show").empty();
+
+                    for (i = 0; i < data.data.length; i++) {
+
+                        $("#show").append(
+                            '<tr>' +
+                            '<td>' + data.data[i].ID + '</td>' +
+                            '<td>' + data.data[i].Username + '</td>' +
+                            '<td>' + data.data[i].Nickname + '</td>' +
+                            '<td>' + data.data[i].Height + '</td>' +
+                            '<td>' + data.data[i].Weight + '</td>' +
+                            '<td>' + data.data[i].Created_at + '</td>' +
+                            '</tr>'
+                        );
+                    }
+                } else {
+
+                    alert(data.message);
+                }
+            }
+        });
+    }
 
 
 </script>

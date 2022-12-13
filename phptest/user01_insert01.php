@@ -1,5 +1,6 @@
 <?php
 
+//傳入的值示範
 //{"username":"123","password":"XXX","nickname":"xxx","height":"123","weight":"100"}
 
 $data = file_get_contents("php://input","r");

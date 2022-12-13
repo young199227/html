@@ -10,7 +10,7 @@ $jsonData = json_decode($data, true);
 
 if(isset($jsonData["pname"])&&isset($jsonData["price"])&&isset($jsonData["pnum"])){
 
-    if($jsonData["pname"]!=""&&$jsonData["price"]!=""&&$jsonData["pnum"]){
+    if($jsonData["pname"]!=""&&$jsonData["price"]!=""&&$jsonData["pnum"]!=""){
 
         $p_Pname = $jsonData["pname"];
         $p_Price = $jsonData["price"];
@@ -28,7 +28,7 @@ if(isset($jsonData["pname"])&&isset($jsonData["price"])&&isset($jsonData["pnum"]
             die("連線錯誤:".mysqli_connect_error());
         }
         
-        $sql = "INSERT INTO food01(Pname,Price,Pnum) VALUES ($p_Pname,$p_Price,$p_Pnum)";
+        $sql = "INSERT INTO food01(Pname,Price,Pnum)VALUES('$p_Pname','$p_Price','$p_Pnum')";
         
 
         if(mysqli_query($conn,$sql)){

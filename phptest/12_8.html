@@ -92,10 +92,8 @@
 <script src="../js/jquery-3.6.1.min.js"></script>
 
 <script>
-
+    //先顯示所有資料
     getajax();
-
-    const ggyy = /^(?=.*\d)(?=.*[a-zA-Z]).{6,20}$/;
 
     var flag_username = false;
     var flag_userpassword = false;
@@ -103,7 +101,7 @@
     var flag_usercm = false;
     var flag_userkg = false;
 
-    //#ok按鈕 click事件
+    //新增按鈕 #ok click事件
     $("#ok").click(function () {
         // console.log($("#username").val());
         // console.log($("#userpassword").val());
@@ -121,8 +119,8 @@
             dataJson["height"] = $("#usercm").val();
             dataJson["weight"] = $("#userkg").val();
 
-
-            // JSON.stringify(dataJson);
+            //傳入的值示範
+            //{"username":"123","password":"XXX","nickname":"xxx","height":"123","weight":"100"}
 
             console.log(JSON.stringify(dataJson));
 
@@ -142,7 +140,6 @@
 
                     alert(data.message);
 
-
                 },
                 error: function (data) {
                     console.log(data.message);
@@ -156,9 +153,12 @@
         }
     });
 
-    //#die按鈕 click事件
+    //刪除按鈕 #die按鈕 click事件
     $("#die").click(function () {
+
+        //欄位清空值
         $("#username,#userpassword,#usergy,#usercm,#userkg").val("");
+        //警告內容清除
         $("#err_username,#err_userpassword,#err_usergy,#err_usercm,#err_userkg").html("");
     });
 

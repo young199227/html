@@ -11,7 +11,7 @@
         die("連線錯誤:".mysqli_connect_error());
     }
 
-    $sql = "SELECT * FROM user01 ORDER BY ID";
+    $sql = "SELECT * FROM user01 ORDER BY ID DESC";
 
     $result = mysqli_query($conn,$sql);
 
@@ -31,7 +31,6 @@
         echo '{"state":false,"message":"沒有資料"}';
 
     }
-
 
     mysqli_close($conn);
 

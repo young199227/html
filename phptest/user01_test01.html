@@ -96,7 +96,7 @@
 
         $("#submituser").click(function () {
 
-            if($("#username").val()==""||$("#password").val()==""||$("#nickname").val()==""||$("#height").val()==""||$("#weight").val()==""){
+            if ($("#username").val() == "" || $("#password").val() == "" || $("#nickname").val() == "" || $("#height").val() == "" || $("#weight").val() == "") {
                 alert("內容不能空");
                 return;
             }
@@ -115,20 +115,26 @@
             dataType: "json",
             success: function (data) {
 
-                $("#show").empty();
+                if (data.state) {
 
-                for (i = 0; i < data.length; i++) {
+                    $("#show").empty();
 
-                    $("#show").append(
-                        '<tr>' +
-                        '<td>' + data[i].ID + '</td>' +
-                        '<td>' + data[i].Username + '</td>' +
-                        '<td>' + data[i].Nickname + '</td>' +
-                        '<td>' + data[i].Height + '</td>' +
-                        '<td>' + data[i].Weight + '</td>' +
-                        '<td>' + data[i].Created_at + '</td>' +
-                        '</tr>'
-                    );
+                    for (i = 0; i < data.data.length; i++) {
+
+                        $("#show").append(
+                            '<tr>' +
+                            '<td>' + data.data[i].ID + '</td>' +
+                            '<td>' + data.data[i].Username + '</td>' +
+                            '<td>' + data.data[i].Nickname + '</td>' +
+                            '<td>' + data.data[i].Height + '</td>' +
+                            '<td>' + data.data[i].Weight + '</td>' +
+                            '<td>' + data.data[i].Created_at + '</td>' +
+                            '</tr>'
+                        );
+                    }
+                } else {
+
+                    alert(data.message);
                 }
             }
         });

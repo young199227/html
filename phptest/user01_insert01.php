@@ -35,19 +35,22 @@ $jsonData = json_decode($data, true);
         
         
         if(mysqli_query($conn,$sql)){
-            echo ("新增成功");
+            echo '{"state":"true","message":"新增成功"}';
+        }else{
+
+            echo '{"state":"false","message":"新增資料失敗"'.$sql.mysqli_error($conn).'}';
         }
 
         mysqli_close($conn);
 
     }else{
 
-        echo ("欄位空白");
+        echo '{"state":"false","message":"新增失敗,欄位空白"}';
     }
 
 }else{
 
-    echo ("少一個欄位");
+    echo '{"state":"false","message":"新增失敗,缺少欄位"}';
 }
 
 ?>

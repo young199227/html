@@ -13,14 +13,23 @@
 
     $sql = "SELECT * FROM user01 ORDER BY ID";
 
-    $result = mysqli_query($conn,$sql);
+    if(mysqli_num_rows($result)>0){
 
-    while($row = mysqli_fetch_assoc($result)){
+        while($row = mysqli_fetch_assoc($result)){
 
-        $mydata[] = $row;
+            $mydata[] = $row;
+        }
+
+        // echo json_encode($mydata);
+
+        echo '{"state":true,"message":"讀取成功","data":'. json_encode($mydata) .'}';
+
+    }else{
+
+        echo '{"state":false,"message":"沒有資料"}';
+
     }
 
-    echo json_encode($mydata);
 
     mysqli_close($conn);
 

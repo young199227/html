@@ -10,7 +10,6 @@
     <title>food</title>
 
     <style>
-
         table {
             text-align: center;
         }
@@ -27,14 +26,30 @@
 
         @media screen and (max-width: 768px) {
 
-            table tr th {
+            table {
+                text-align: left;
 
-                font-size: 26px;
+            }
+
+            table thead {
+                display: none;
+            }
+
+            table tr {
+                border: 4px solid rgb(152, 152, 152);
+                border-radius: 15px;
+                display: block;
             }
 
             table tr td {
 
+                display: block;
                 font-size: 18px;
+            }
+
+            table tr td:before {
+                content: attr(data-th)" : ";
+
             }
         }
     </style>
@@ -62,7 +77,7 @@
                                 <input type="text" id="price" class="form-control" placeholder="1~500">
                                 <div class="form-text" id="err_price">　</div>
 
-                                <label for="">數量</label>
+                                <label for="">座號</label>
                                 <input type="number" id="pnum" class="form-control" placeholder="1-30" min="1" max="30">
                                 <div class="form-text" id="err_pnum">　</div>
 
@@ -92,12 +107,18 @@
                             <th>編號</th>
                             <th>品名</th>
                             <th>價錢</th>
-                            <th>數量</th>
+                            <th>座號</th>
                             <th>訂購時間</th>
                         </tr>
                     </thead>
                     <tbody id="show">
-
+                        <!-- <tr>
+                            <td data-th="編號">1</td>
+                            <td data-th="品名">1</td>
+                            <td data-th="價錢">1</td>
+                            <td data-th="數量">1</td>
+                            <td data-th="訂購時間">1</td>
+                        </tr> -->
                     </tbody>
                 </table>
 
@@ -146,7 +167,13 @@
                     dataType: "json",
                     contentType: "application/json;chartset=utf-8",
                     success: function (data) {
+
+                        //ajaxget()自定義的ajax拿資料方法
                         ajaxget();
+
+                        //showClear()自定義的清除資訊欄方法
+                        showClear();
+
                         alert(data.message);
 
                     },
@@ -232,6 +259,8 @@
     //ajax拿資料
     function ajaxget() {
 
+        var mony = 0;
+
         $.ajax({
 
             type: "post",
@@ -244,17 +273,30 @@
                 for (i = 0; i < data.data.length; i++) {
 
                     $("#show").append(
-                        '<tr>' +
-                        '<td>' + data.data[i].ID + '</td>' +
-                        '<td>' + data.data[i].Pname + '</td>' +
-                        '<td>' + data.data[i].Price + '</td>' +
-                        '<td>' + data.data[i].Pnum + '</td>' +
-                        '<td>' + data.data[i].Created_at + '</td>' +
+                        '<tr class="mt-3">' +
+                        '<td data-th="編號">' + data.data[i].ID + '</td>' +
+                        '<td data-th="品名">' + data.data[i].Pname + '</td>' +
+                        '<td data-th="價錢">' + data.data[i].Price + '</td>' +
+                        '<td data-th="數量">' + data.data[i].Pnum + '</td>' +
+                        '<td data-th="訂購時間">' + data.data[i].Created_at + '</td>' +
                         '</tr>'
 
                     );
 
+                    // console.log(data.data[i].Price);
+                    mony = parseInt(data.data[i].Price) + mony;
+                    // console.log(mony);
                 }
+
+                $("#show").append(
+                    '<tr class="mt-3">' +
+                    '<td>' + "總價錢:" + mony + '</td>' +
+                    '<td>' + "有幾個便當:" + data.data.length + '</td>' +
+                    '</tr>'
+                );
+
+                // console.log("總價錢:" + mony);
+                // console.log("有幾個便當:" + data.data.length);
 
             },
             error: function (data) {

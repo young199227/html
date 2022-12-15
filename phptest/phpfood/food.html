@@ -32,6 +32,13 @@
             cursor: pointer;
         }
 
+        #ex_desc_str{
+            width: 90px;
+            height: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         @media screen and (max-width: 768px) {
 
             table {
@@ -144,7 +151,8 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="eeeModalLabel">訂單編號<h1 id="modal_id"></h1></h1>
+                    <h1 class="modal-title fs-5" id="eeeModalLabel">訂單編號<h1 id="modal_id"></h1>
+                    </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -264,16 +272,16 @@
                 $.ajax({
                     type: "POST",
                     url: "update.php",
-                    data:JSON.stringify(dataJson),
+                    data: JSON.stringify(dataJson),
                     dataType: "json",
-                    success:function(data){
+                    success: function (data) {
                         //刷新頁面
                         ajaxget();
                         alert("修改成功");
                         //自動按取消鈕
                         $("#modalclear").trigger("click");
                     },
-                    error:function(data){
+                    error: function (data) {
 
                         console.log(data.message);
                     }
@@ -387,8 +395,77 @@
             showClear();
         });
 
-
     });
+
+    //修改品名
+    function updatefood_name(id) {
+        console.log(id);
+        var span_str = $('#'+id);
+        var ex_desc_str = span_str.text();
+        var input_str = $('<input type="text" class="form-control" id="ex_desc_str" name="filename" value="'+ ex_desc_str +'"/>');
+        span_str.html(input_str);
+        input_str.click(function(){return false;});
+        input_str.trigger("focus");
+        input_str.select();
+
+        input_str.blur(function(){
+            
+            span_str.html($("#ex_desc_str").val());
+        });
+    }
+
+    //ajax拿資料
+    function ajaxget() {
+
+        var mony = 0;
+
+        $.ajax({
+
+            type: "post",
+            url: "select.php",
+            dataType: "json",
+            success: function (data) {
+
+                $("#show").empty();
+
+                for (i = 0; i < data.data.length; i++) {
+                    
+                    $("#show").append(
+                        '<tr class="mt-3">' +
+                        '<td data-th="編號">' + data.data[i].ID + '</td>' +
+                        '<td data-th="品名" id="' + data.data[i].ID + '"ondblclick="updatefood_name(' + data.data[i].ID + ')">' + data.data[i].Pname + '</td>' +
+                        '<td data-th="價錢">' + data.data[i].Price + '</td>' +
+                        '<td data-th="數量">' + data.data[i].Pnum + '</td>' +
+                        '<td data-th="訂購時間">' + data.data[i].Created_at +
+                        '<td data-th="修改" class="insert" data-bs-toggle="modal" data-bs-target="#eee" onclick="updatefood(' + i + ')">' + "✎" +
+                        '<td data-th="刪除" class="delete" onclick="deletefood(' + data.data[i].ID + ')">' + "✖" +
+                        '</td>' +
+                        '</tr>'
+
+                    );
+
+                    // console.log(data.data[i].Price);
+                    mony = parseInt(data.data[i].Price) + mony;
+                    // console.log(mony);
+                }
+
+                $("#show").append(
+                    '<tr class="mt-3">' +
+                    '<td>' + "總價錢:" + mony + '</td>' +
+                    '<td>' + "有幾個便當:" + data.data.length + '</td>' +
+                    '</tr>'
+                );
+
+                // console.log("總價錢:" + mony);
+                // console.log("有幾個便當:" + data.data.length);
+
+            },
+            error: function (data) {
+                console.log(data.message);
+            }
+        });
+
+    }
 
     //按下✎傳入ajaxget()內迴圈跑到的data.data.length值 用值 拿到資料後修改modal的內容
     function updatefood(i) {
@@ -442,59 +519,6 @@
             });
 
         }
-    }
-
-    //ajax拿資料
-    function ajaxget() {
-
-        var mony = 0;
-
-        $.ajax({
-
-            type: "post",
-            url: "select.php",
-            dataType: "json",
-            success: function (data) {
-
-                $("#show").empty();
-
-                for (i = 0; i < data.data.length; i++) {
-
-                    $("#show").append(
-                        '<tr class="mt-3">' +
-                        '<td data-th="編號">' + data.data[i].ID + '</td>' +
-                        '<td data-th="品名">' + data.data[i].Pname + '</td>' +
-                        '<td data-th="價錢">' + data.data[i].Price + '</td>' +
-                        '<td data-th="數量">' + data.data[i].Pnum + '</td>' +
-                        '<td data-th="訂購時間">' + data.data[i].Created_at +
-                        '<td data-th="修改" class="insert" data-bs-toggle="modal" data-bs-target="#eee" onclick="updatefood(' + i + ')">' + "✎" +
-                        '<td data-th="刪除" class="delete" onclick="deletefood(' + data.data[i].ID + ')">' + "✖" +
-                        '</td>' +
-                        '</tr>'
-
-                    );
-
-                    // console.log(data.data[i].Price);
-                    mony = parseInt(data.data[i].Price) + mony;
-                    // console.log(mony);
-                }
-
-                $("#show").append(
-                    '<tr class="mt-3">' +
-                    '<td>' + "總價錢:" + mony + '</td>' +
-                    '<td>' + "有幾個便當:" + data.data.length + '</td>' +
-                    '</tr>'
-                );
-
-                // console.log("總價錢:" + mony);
-                // console.log("有幾個便當:" + data.data.length);
-
-            },
-            error: function (data) {
-                console.log(data.message);
-            }
-        });
-
     }
 
     //篩選欄位資料方法

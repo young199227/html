@@ -24,6 +24,14 @@
             font-size: 20px;
         }
 
+        .delete:hover {
+            cursor: pointer;
+        }
+
+        .insert:hover {
+            cursor: pointer;
+        }
+
         @media screen and (max-width: 768px) {
 
             table {
@@ -109,6 +117,8 @@
                             <th>價錢</th>
                             <th>座號</th>
                             <th>訂購時間</th>
+                            <th>修改</th>
+                            <th>刪除</th>
                         </tr>
                     </thead>
                     <tbody id="show">
@@ -118,10 +128,46 @@
                             <td data-th="價錢">1</td>
                             <td data-th="數量">1</td>
                             <td data-th="訂購時間">1</td>
+                            <td data-th="刪除">1</td>
                         </tr> -->
                     </tbody>
                 </table>
 
+            </div>
+        </div>
+    </div>
+
+
+    <!-- updateModal -->
+    <div class="modal fade" id="eee" tabindex="-1" aria-labelledby="eeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="eeeModalLabel">訂單編號<h1 id="modal_id"></h1></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <label for="">品名</label>
+                    <input type="text" id="modal_pname" class="form-control" placeholder="2~8字">
+                    <div class="form-text" id="modal_err_pname">　</div>
+
+                    <label for="">價錢</label>
+                    <input type="text" id="modal_price" class="form-control" placeholder="1~500">
+                    <div class="form-text" id="modal_err_price">　</div>
+
+                    <label for="">座號</label>
+                    <input type="number" id="modal_pnum" class="form-control" placeholder="1-30" min="1" max="30">
+                    <div class="form-text" id="modal_err_pnum">　</div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="modalclear">取消</button>
+                    <button type="button" class="btn btn-primary" id="updateok">確認修改</button>
+                </div>
             </div>
         </div>
     </div>
@@ -140,6 +186,10 @@
     var pname_state = false;
     var price_state = false;
     var pnum_state = false;
+
+    var modal_pname_state = false;
+    var modal_price_state = false;
+    var modal_pnum_state = false;
 
     //事件丟這裡
     $(function () {
@@ -197,6 +247,43 @@
 
         });
 
+        //按下確認修改 #updateok click
+        $("#updateok").click(function () {
+
+            if (modal_pname_state && modal_price_state && modal_pnum_state) {
+
+                var dataJson = {};
+
+                dataJson["id"] = $("#modal_id").html();
+                dataJson["pname"] = $("#modal_pname").val();
+                dataJson["price"] = $("#modal_price").val();
+                dataJson["pnum"] = $("#modal_pnum").val();
+
+                // console.log(JSON.stringify(dataJson));
+
+                $.ajax({
+                    type: "POST",
+                    url: "update.php",
+                    data:JSON.stringify(dataJson),
+                    dataType: "json",
+                    success:function(data){
+                        //刷新頁面
+                        ajaxget();
+                        alert("修改成功");
+                        //自動按取消鈕
+                        $("#modalclear").trigger("click");
+                    },
+                    error:function(data){
+
+                        console.log(data.message);
+                    }
+                });
+
+            } else {
+                alert("資料不正確發送失敗");
+            }
+
+        });
 
         //輸入事件
         $("#pname").keyup(function () {
@@ -246,6 +333,53 @@
             }
         });
 
+        $("#modal_pname").keyup(function () {
+
+            if ($("#modal_pname").val().length >= 2 && $("#modal_pname").val().length <= 8) {
+
+                $("#modal_err_pname").html("正確").css("color", "green");
+
+                modal_pname_state = true;
+            } else {
+
+                $("#modal_err_pname").html("2-8字").css("color", "red");
+
+                modal_pname_state = false;
+            }
+        });
+
+        $("#modal_price").keyup(function () {
+
+            if ($("#modal_price").val() >= 1 && $("#modal_price").val() <= 500) {
+
+                $("#modal_err_price").html("正確").css("color", "green");
+
+                modal_price_state = true;
+
+            } else {
+
+                $("#modal_err_price").html("價錢1-500").css("color", "red");
+
+                modal_price_state = false;
+            }
+        });
+
+        $("#modal_pnum").keyup(function () {
+
+            if ($("#modal_pnum").val() >= 1 && $("#modal_pnum").val() <= 30) {
+
+                $("#modal_err_pnum").html("正確").css("color", "green");
+
+                modal_pnum_state = true;
+
+            } else {
+
+                $("#modal_err_pnum").html("數量1-30").css("color", "red");
+
+                modal_pnum_state = false;
+            }
+        });
+
 
         //清空按鈕事件 showClear自定義的清除資訊欄方法
         $("#die").click(function () {
@@ -253,8 +387,62 @@
             showClear();
         });
 
+
     });
 
+    //按下✎傳入ajaxget()內迴圈跑到的data.data.length值 用值 拿到資料後修改modal的內容
+    function updatefood(i) {
+
+        $.ajax({
+            type: "GET",
+            url: "select.php",
+            dataType: "json",
+            success: function (data) {
+
+                $("#modal_id").html(data.data[i].ID);
+                $("#modal_pname").val(data.data[i].Pname);
+                $("#modal_price").val(data.data[i].Price);
+                $("#modal_pnum").val(data.data[i].Pnum);
+
+                modalValue();
+            },
+            error: function (data) {
+                console.log(data.message);
+            }
+        });
+    }
+
+    //按下✖依照idvalue刪除資料
+    function deletefood(id) {
+
+        if (confirm("要刪除編號" + id + "的訂單嗎?")) {
+
+            var dataJson = {};
+
+            dataJson["id"] = id;
+
+            $.ajax({
+
+                type: "POST",
+                url: "delete.php",
+                data: JSON.stringify(dataJson),
+                dataType: "json",
+                contentType: "application/json;chartset=utf-8",
+                success: function () {
+
+                    //ajaxget()自定義的ajax拿資料方法
+                    ajaxget();
+
+                    alert("刪除成功");
+                },
+                error: function () {
+                    console.log("ajax刪除失敗");
+                }
+
+            });
+
+        }
+    }
 
     //ajax拿資料
     function ajaxget() {
@@ -278,7 +466,10 @@
                         '<td data-th="品名">' + data.data[i].Pname + '</td>' +
                         '<td data-th="價錢">' + data.data[i].Price + '</td>' +
                         '<td data-th="數量">' + data.data[i].Pnum + '</td>' +
-                        '<td data-th="訂購時間">' + data.data[i].Created_at + '</td>' +
+                        '<td data-th="訂購時間">' + data.data[i].Created_at +
+                        '<td data-th="修改" class="insert" data-bs-toggle="modal" data-bs-target="#eee" onclick="updatefood(' + i + ')">' + "✎" +
+                        '<td data-th="刪除" class="delete" onclick="deletefood(' + data.data[i].ID + ')">' + "✖" +
+                        '</td>' +
                         '</tr>'
 
                     );
@@ -345,6 +536,47 @@
             $("#err_pnum").html("數量1-30").css("color", "red");
 
             pnum_state = false;
+        }
+    }
+
+    function modalValue() {
+
+        if ($("#modal_pname").val().length >= 2 && $("#modal_pname").val().length <= 8) {
+
+            $("#modal_err_pname").html("正確").css("color", "green");
+
+            modal_pname_state = true;
+        } else {
+
+            $("#modal_err_pname").html("2-8字").css("color", "red");
+
+            modal_pname_state = false;
+        }
+
+        if ($("#modal_price").val() >= 1 && $("#modal_price").val() <= 500) {
+
+            $("#modal_err_price").html("正確").css("color", "green");
+
+            modal_price_state = true;
+
+        } else {
+
+            $("#modal_err_price").html("價錢1-500").css("color", "red");
+
+            modal_price_state = false;
+        }
+
+        if ($("#modal_pnum").val() >= 1 && $("#modal_pnum").val() <= 30) {
+
+            $("#modal_err_pnum").html("正確").css("color", "green");
+
+            modal_pnum_state = true;
+
+        } else {
+
+            $("#modal_err_pnum").html("數量1-30").css("color", "red");
+
+            modal_pnum_state = false;
         }
     }
 

@@ -400,17 +400,17 @@
     //點品名2下直接修改
     function updatefood_name(id) {
         console.log(id);
-        var span_str = $('#'+id);
-        var ex_desc_str = span_str.text();
-        var input_str = $('<input type="text" class="form-control" id="ex_desc_str" name="filename" value="'+ ex_desc_str +'"/>');
-        span_str.html(input_str);
+        var td_str = $('#'+id);
+        var ex_desc_str = td_str.text();
+        var input_str = $('<input type="text" id="ex_desc_str" name="filename" value="'+ ex_desc_str +'"/>');
+        td_str.html(input_str);
         input_str.click(function(){return false;});
         input_str.trigger("focus");
         input_str.select();
 
         input_str.blur(function(){
             
-            span_str.html($("#ex_desc_str").val());
+            td_str.html($("#ex_desc_str").val());
         });
     }
 

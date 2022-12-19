@@ -10,8 +10,8 @@ $conn = mysqli_connect($servername,$username,$password,$dbname);
 if(!$conn){
     die("連線錯誤:".mysqli_connect_error());
 }
-
-$sql = "SELECT * FROM food01 ORDER BY ID DESC";
+//DESC 為大到小
+$sql = "SELECT * FROM food01 ORDER BY Pnum";
 
 $result = mysqli_query($conn,$sql);
 

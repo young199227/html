@@ -84,6 +84,10 @@
 
                             <div class="">
 
+                                <label for="">座號</label>
+                                <input type="number" id="pnum" class="form-control" placeholder="1-30" min="1" max="30">
+                                <div class="form-text" id="err_pnum">　</div>
+
                                 <label for="">品名</label>
                                 <input type="text" id="pname" class="form-control" placeholder="2~8字">
                                 <div class="form-text" id="err_pname">　</div>
@@ -91,10 +95,6 @@
                                 <label for="">價錢</label>
                                 <input type="text" id="price" class="form-control" placeholder="1~500">
                                 <div class="form-text" id="err_price">　</div>
-
-                                <label for="">座號</label>
-                                <input type="number" id="pnum" class="form-control" placeholder="1-30" min="1" max="30">
-                                <div class="form-text" id="err_pnum">　</div>
 
                             </div>
 
@@ -114,15 +114,16 @@
         </div>
 
         <div class="row">
-            <div class="col-xl-8 offset-xl-2 mt-3">
+            <div class="col-xl-12 mt-3">
 
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>編號</th>
+                            <th>座號</th>
                             <th>品名</th>
                             <th>價錢</th>
-                            <th>座號</th>
+                            <th>　備註　</th>
+                            <th>訂單編號</th>
                             <th>訂購時間</th>
                             <th>修改</th>
                             <th>刪除</th>
@@ -158,6 +159,10 @@
 
                 <div class="modal-body">
 
+                    <label for="">座號</label>
+                    <input type="number" id="modal_pnum" class="form-control" placeholder="1-30" min="1" max="30">
+                    <div class="form-text" id="modal_err_pnum">　</div>
+
                     <label for="">品名</label>
                     <input type="text" id="modal_pname" class="form-control" placeholder="2~8字">
                     <div class="form-text" id="modal_err_pname">　</div>
@@ -165,10 +170,6 @@
                     <label for="">價錢</label>
                     <input type="text" id="modal_price" class="form-control" placeholder="1~500">
                     <div class="form-text" id="modal_err_price">　</div>
-
-                    <label for="">座號</label>
-                    <input type="number" id="modal_pnum" class="form-control" placeholder="1-30" min="1" max="30">
-                    <div class="form-text" id="modal_err_pnum">　</div>
 
                 </div>
 
@@ -410,7 +411,28 @@
 
         input_str.blur(function(){
             
-            td_str.html($("#ex_desc_str").val());
+            // td_str.html($("#ex_desc_str").val());
+
+            var dataJson = {};
+
+            dataJson["id"] = id;
+            dataJson["premark"] = $("#ex_desc_str").val();
+
+            console.log(JSON.stringify(dataJson));
+            $.ajax({
+                type:"POST",
+                url:"upadte_Premark.php",
+                data:JSON.stringify(dataJson),
+                dataType:"json",
+                success:function(data){
+                    ajaxget();
+                    console.log(data.message);
+                },
+                error:function(data){
+                    console.log(data.message);
+                }
+
+            });
         });
     }
 
@@ -432,10 +454,11 @@
                     
                     $("#show").append(
                         '<tr class="mt-3">' +
-                        '<td data-th="編號">' + data.data[i].ID + '</td>' +
-                        '<td data-th="品名" id="' + data.data[i].ID + '"ondblclick="updatefood_name(' + data.data[i].ID + ')">' + data.data[i].Pname + '</td>' +
+                        '<td data-th="座號">' + data.data[i].Pnum + '</td>' +
+                        '<td data-th="品名">' + data.data[i].Pname + '</td>' +
                         '<td data-th="價錢">' + data.data[i].Price + '</td>' +
-                        '<td data-th="數量">' + data.data[i].Pnum + '</td>' +
+                        '<td data-th="備註" id="' + data.data[i].ID + '"ondblclick="updatefood_name(' + data.data[i].ID + ')">' + data.data[i].Premark + '</td>' +
+                        '<td data-th="訂單編號">' + data.data[i].ID + '</td>' +
                         '<td data-th="訂購時間">' + data.data[i].Created_at +
                         '<td data-th="修改" class="insert" data-bs-toggle="modal" data-bs-target="#eee" onclick="updatefood(' + i + ')">' + "✎" +
                         '<td data-th="刪除" class="delete" onclick="deletefood(' + data.data[i].ID + ')">' + "✖" +

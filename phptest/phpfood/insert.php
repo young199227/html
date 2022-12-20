@@ -24,7 +24,7 @@ if(isset($jsonData["pname"])&&isset($jsonData["price"])&&isset($jsonData["pnum"]
         
         $conn = mysqli_connect($servername,$username,$password,$dbname);
         
-        if(!$conn){
+        if(!$conn){ 
             die("連線錯誤:".mysqli_connect_error());
         }
         

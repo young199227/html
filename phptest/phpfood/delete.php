@@ -31,12 +31,12 @@ if(isset($jsonData["id"])){
             $sql = "DELETE FROM food01 WHERE ID=$p_Id";
         
 
-            if(mysqli_query($conn, $sql)){
+            if(mysqli_query($conn, $sql)&&mysqli_affected_rows($conn)==1){
 
                 echo '{"state":"true","message":"刪除成功"}';
             }else{
 
-                echo '{"state":"false","message":"刪除失敗"'.$sql.mysqli_error($conn).'}';
+                echo '{"state":"false","message":"刪除失敗"'.$sql.mysqli_error($conn)."或是沒有這個ID可刪除".'}';
             }
 
         mysqli_close($conn);

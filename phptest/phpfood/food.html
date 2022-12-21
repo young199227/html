@@ -10,18 +10,23 @@
     <title>food</title>
 
     <style>
+        body{
+            background-color: rgb(31, 31, 31);
+        }
         table {
             text-align: center;
         }
 
         table tr th {
-            font-family: naikaifont;
+            /* font-family: naikaifont; */
             font-size: 35px;
+            color: rgb(226, 226, 226);
         }
 
         table tr td {
-            font-family: naikaifont;
+            /* font-family: naikaifont; */
             font-size: 20px;
+            color: rgb(226, 226, 226);
         }
 
         .delete:hover {
@@ -67,6 +72,15 @@
 
             }
         }
+
+        .box{
+            /* border: 3px solid #000;
+            border-radius: 15px; */
+            padding: 5px;
+        }
+        #show_pname2 tr td{
+            text-align:right;
+        }
     </style>
 
 </head>
@@ -75,8 +89,8 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-6 offset-md-3 col-lg-4 offset-lg-4 mt-3">
 
+            <div class="col-md-4 offset-md-4 mt-3">
                 <div class="card">
                     <div class="card-body">
 
@@ -109,8 +123,8 @@
 
                     </div>
                 </div>
-
             </div>
+
         </div>
 
         <div class="row">
@@ -123,8 +137,8 @@
                             <th>品名</th>
                             <th>價錢</th>
                             <th>超厲害備註</th>
-                            <th>訂單編號</th>
-                            <th>訂購時間</th>
+                            <!-- <th>訂單編號</th>
+                            <th>訂購時間</th> -->
                             <th>修改</th>
                             <th>刪除</th>
                         </tr>
@@ -141,6 +155,24 @@
                     </tbody>
                 </table>
 
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+
+                <div class="box">
+                    <div>
+                        <table class="table" id="show_pname">
+                            
+                        </table>
+                    </div>
+                    <div>
+                        <table class="table" id="show_pname2">
+
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -400,7 +432,7 @@
 
     //點品名2下直接修改
     function updatefood_name(id) {
-        console.log(id);
+        // console.log(id);
         var td_str = $('#' + id);
         var ex_desc_str = td_str.text();
         var input_str = $('<input type="text" id="ex_desc_str" name="filename" value="' + ex_desc_str + '"/>');
@@ -418,7 +450,7 @@
             dataJson["id"] = id;
             dataJson["premark"] = $("#ex_desc_str").val();
 
-            console.log(JSON.stringify(dataJson));
+            // console.log(JSON.stringify(dataJson));
             $.ajax({
                 type: "POST",
                 url: "upadte_Premark.php",
@@ -426,7 +458,7 @@
                 dataType: "json",
                 success: function (data) {
                     ajaxget();
-                    console.log(data.message);
+                    // console.log(data.message);
                 },
                 error: function (data) {
                     console.log(data.message);
@@ -448,9 +480,9 @@
             dataType: "json",
             success: function (data) {
 
-                var pname = [];
-
                 $("#show").empty();
+                $("#show_pname").empty();
+                $("#show_pname2").empty();
 
                 for (i = 0; i < data.data.length; i++) {
 
@@ -460,8 +492,8 @@
                         '<td data-th="品名">' + data.data[i].Pname + '</td>' +
                         '<td data-th="價錢">' + data.data[i].Price + '</td>' +
                         '<td data-th="備註" id="' + data.data[i].ID + '"ondblclick="updatefood_name(' + data.data[i].ID + ')">' + data.data[i].Premark + '</td>' +
-                        '<td data-th="訂單編號">' + data.data[i].ID + '</td>' +
-                        '<td data-th="訂購時間">' + data.data[i].Created_at +
+                        // '<td data-th="訂單編號">' + data.data[i].ID + '</td>' +
+                        // '<td data-th="訂購時間">' + data.data[i].Created_at +
                         '<td data-th="修改" class="insert" data-bs-toggle="modal" data-bs-target="#eee" onclick="updatefood(' + i + ')">' + "✎" +
                         '<td data-th="刪除" class="delete" onclick="deletefood(' + data.data[i].ID + ')">' + "✖" +
                         '</td>' +
@@ -474,33 +506,22 @@
                     // console.log(mony);
                 }
 
-                let newArr = pname.filter(function (element, index, self) {
-                    return self.indexOf(element) === index;
-                });
+                ///////////////
+                //便當統計插入點 自定義方法
+                //////////////
+                group_by_pname();
 
-                for (i = 0; i < newArr.length; i++) {
-                    $("#show").append(
-                        '<tr class="mt-3">' +
-                        '<td></td>' +
-                        '<td></td>' +
-                        '<td></td>' +
-                        '<td></td>' +
-                        '<td>' + newArr[i] + '</td>' +
-                        '</tr>'
-                    );
-                    // console.log(newArr[i]);
-                }
+                $("#show_pname2").append(
 
-                $("#show").append(
-                    '<tr class="mt-3">' +
-                    '<td></td>' +
-                    '<td></td>' +
-                    '<td></td>' +
-                    '<td></td>' +
-                    '<td>' + "有幾個便當:" + data.data.length + '</td>' +
-                    '<td>' + "總價錢:" + mony + '</td>' +
+                    '<tr>' +
+                    '<td>' +  data.data.length +'個便當</td>' +
+                    '</tr>'+
+                    '<tr>' +
+                    '<td>總共:' +  mony + '元</td>' +
                     '</tr>'
                 );
+
+
 
                 // console.log("總價錢:" + mony);
                 // console.log("有幾個便當:" + data.data.length);
@@ -565,6 +586,31 @@
             });
 
         }
+    }
+
+    //統計便當的方法
+    function group_by_pname() {
+
+        $.ajax({
+            type: "POST",
+            url: "select_group_by_pname.php",
+            dataType: "json",
+            success: function (data) {
+
+                for (i = 0; i < data.data.length; i++) {
+                    $("#show_pname").append(
+                        '<tr>' +
+                        '<td>' + data.data[i].Pname + '</td>' +
+                        '<td>' + data.data[i].sum + "個" + '</td>' +
+                        '</tr>'
+                    );
+                }
+            },
+            error: function (data) {
+                console.log(data.message);
+            }
+
+        });
     }
 
     //篩選欄位資料方法

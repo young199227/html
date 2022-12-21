@@ -59,60 +59,83 @@
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery-3.6.1.min.js"></script>
 <script>
+    //儲存 ?id= 的值
+    var id ;
 
 
-    $(function () {
+    //按下修改後ajax送出json修改資料
+    $("#ok").click(function(){
 
+        var dataJson = {};
+        dataJson["id"] = id;
+        dataJson["pnum"] = $("#pnum").val();
+        dataJson["pname"] = $("#pname").val();
+        dataJson["price"] = $("#price").val();
 
         $.ajax({
-            type:"GET",
-            url:"select.php",
+            type:"POST",
+            url:"update.php",
+            data:JSON.stringify(dataJson),
             dataType:"json",
             success:function(data){
-
-                console.log(data);
-
-                var hrefId  = location.href.split("=");
-
-                for(i=0;i<data.data.length;i++){
-                    // console.log(i);
-                    if(data.data[i].ID==hrefId[1]){
-
-                        
-                        console.log("有這個ID號碼!");
-                    }
-                }
-
-                // console.log(data);
-                // console.log(data.message);
+                alert("修改成功");
+                location.href="food2.html";
             },
             error:function(data){
+                console.log(data.message);
+            }
+
+        });
+
+    });
+
+    //進入頁面依照 ?id= 取值填入資料
+    $(function () {
+
+        var hrefId = location.href.split("=");
+
+        var dataJson = {};
+
+        dataJson["id"] = hrefId[1];
+
+        $.ajax({
+            type: "POST",
+            url: "select_by_id.php",
+            data: JSON.stringify(dataJson),
+            dataType: "json",
+            success: function (data) {
+
+                console.log(data.state);
+                if(data.message=="缺少欄位讀取失敗"||data.message=="欄位有空值讀取失敗"||data.message=="沒有資料"){
+                    alert("沒有這個ID");
+                    location.href="food2.html";
+                }
+
+                $("#pnum").val(data.data[0].Pnum);
+                $("#pname").val(data.data[0].Pname);
+                $("#price").val(data.data[0].Price);
+                
+                id = data.data[0].ID;
+            },
+            error: function (data) {
+
                 console.log(data.message);
             }
         });
 
     });
 
-    
-
-    $("#up #update").click(function () {
-
-        console.log($(this).data());
-
-        var pname = $(this).data("name");
-
-        $("#pname").val(pname);
-    });
 
 
-    var a = ["雞排飯", "排骨飯", "雞排飯", "排骨飯", "雞排飯", "排骨飯", "雞排飯", "排骨飯"];
 
-    var aa = a.filter(function (val) {
+    // var a = ["雞排飯", "排骨飯", "雞排飯", "排骨飯", "雞排飯", "排骨飯", "雞排飯", "排骨飯"];
 
-        return val == '雞排飯';
-    });
+    // var aa = a.filter(function (val) {
 
-    console.log("雞排數量:" + aa.length);
+    //     return val == '雞排飯';
+    // });
+
+    // console.log("雞排數量:" + aa.length);
 
 
 </script>

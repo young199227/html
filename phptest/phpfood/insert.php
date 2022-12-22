@@ -1,5 +1,7 @@
 <?php
 
+require_once("db.php");
+
 //{"pname":"超好吃飯","price":"100","pnum":"1"}
 
 $data = file_get_contents("php://input","r");
@@ -17,21 +19,25 @@ if(isset($jsonData["pname"])&&isset($jsonData["price"])&&isset($jsonData["pnum"]
         $p_Pnum = $jsonData["pnum"];
         
 
-        $servername = "localhost";
-        $username = "owner";
-        $password = "123456";
-        $dbname = "testdb";
+        // $servername = "localhost";
+        // $username = "owner";
+        // $password = "123456";
+        // $dbname = "testdb";
         
-        $conn = mysqli_connect($servername,$username,$password,$dbname);
+        // $conn = mysqli_connect($servername,$username,$password,$dbname);
         
-        if(!$conn){ 
-            die("連線錯誤:".mysqli_connect_error());
-        }
+        // if(!$conn){ 
+        //     die("連線錯誤:".mysqli_connect_error());
+        // }
+
+        $conn = cerate_connect();
         
         $sql = "INSERT INTO food01(Pname,Price,Pnum)VALUES('$p_Pname','$p_Price','$p_Pnum')";
+
+        $result = execute_sql($conn,"testdb",$sql);
         
 
-        if(mysqli_query($conn,$sql)){
+        if($result){
 
             echo '{"state":"true","message":"新增成功"}';
         }else{

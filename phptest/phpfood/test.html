@@ -60,11 +60,11 @@
 <script src="/js/jquery-3.6.1.min.js"></script>
 <script>
     //儲存 ?id= 的值
-    var id ;
+    var id;
 
 
     //按下修改後ajax送出json修改資料
-    $("#ok").click(function(){
+    $("#ok").click(function () {
 
         var dataJson = {};
         dataJson["id"] = id;
@@ -73,15 +73,15 @@
         dataJson["price"] = $("#price").val();
 
         $.ajax({
-            type:"POST",
-            url:"update.php",
-            data:JSON.stringify(dataJson),
-            dataType:"json",
-            success:function(data){
+            type: "POST",
+            url: "update.php",
+            data: JSON.stringify(dataJson),
+            dataType: "json",
+            success: function (data) {
                 alert("修改成功");
-                location.href="food2.html";
+                location.href = "food2.html";
             },
-            error:function(data){
+            error: function (data) {
                 console.log(data.message);
             }
 
@@ -106,15 +106,15 @@
             success: function (data) {
 
                 console.log(data.state);
-                if(data.message=="缺少欄位讀取失敗"||data.message=="欄位有空值讀取失敗"||data.message=="沒有資料"){
+                if (data.message == "缺少欄位讀取失敗" || data.message == "欄位有空值讀取失敗" || data.message == "沒有資料") {
                     alert("沒有這個ID");
-                    location.href="food2.html";
+                    location.href = "food2.html";
                 }
 
                 $("#pnum").val(data.data[0].Pnum);
                 $("#pname").val(data.data[0].Pname);
                 $("#price").val(data.data[0].Price);
-                
+
                 id = data.data[0].ID;
             },
             error: function (data) {

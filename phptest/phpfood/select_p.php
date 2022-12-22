@@ -10,8 +10,7 @@ $conn = mysqli_connect($servername,$username,$password,$dbname);
 if(!$conn){
     die("連線錯誤:".mysqli_connect_error());
 }
-//DESC 為大到小
-$sql = "SELECT * FROM food01 ORDER BY Pnum";
+$sql = "SELECT Pname, COUNT(*) AS 'sum' FROM food01 GROUP BY Pname ORDER BY COUNT(*) DESC";
 
 $result = mysqli_query($conn,$sql);
 
@@ -32,5 +31,6 @@ if(mysqli_num_rows($result)>0){
 }
 
 mysqli_close($conn);
+
 
 ?>

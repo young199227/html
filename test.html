@@ -1,24 +1,322 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/mycolor.css">
+
+    <style>
+        .demo {
+            padding: 10px;
+            margin-top: 10px;
+            background-color: rgb(255, 218, 171);
+            border: 2px solid #000;
+        }
+
+        .box {
+            width: 150px;
+            height: 150px;
+            background-color: aquamarine;
+            border: 2px solid #000;
+            margin: 10px;
+
+            display: inline-block;
+        }
+
+        .demo01 {
+            height: 600px;
+            width: 600px;
+            margin-top: 10px;
+            background-color: rgb(255, 218, 171);
+            border: 2px solid #000;
+        }
+
+        .box01 {
+            width: 150px;
+            height: 150px;
+            background-color: aquamarine;
+            border: 2px solid #000;
+
+
+            display: inline-block;
+        }
+    </style>
+
 </head>
+
 <body>
-    
+
+    <div class="demo">
+        <h1>border上下左右top,bottom,start,end</h1>
+        <div class="box border-top"></div>
+        <div class="box border-bottom"></div>
+        <div class="box border-start"></div>
+        <div class="box border-end"></div>
+    </div>
+
+    <div class="demo">
+        <h1>增加移除border-0框線&&修改顏色border-primary</h1>
+        <div class="box border-0"></div>
+        <div class="box border-top-0"></div>
+        <div class="box "></div>
+        <div class="box border-primary"></div>
+    </div>
+
+    <div class="demo">
+        <h1>border圓角rounded</h1>
+        <div class="box border-3 rounded"></div>
+        <div class="box "></div>
+        <div class="box "></div>
+        <div class="box "></div>
+    </div>
+
+    <div class="demo">
+        <h1 class="text">甲文產生器</h1>
+        <h1 class="text-white">甲文產生器</h1>
+        <h1 class="text-bg-dark p-3">甲文產生器</h1>
+    </div>
+
+    <div class="demo">
+        <h1>按鈕製作 div直接撐開 d-inline 限制大小</h1>
+        <div class="text-bg-success p-2 d-inline rounded">123</div>
+        <div class="text-bg-warning p-2 d-inline rounded">321</div>
+    </div>
+
+    <div class="demo">
+        <h1>span跟著字大小 d-block 縮小</h1>
+        <span class="text-bg-success p-2 d-block rounded">123</span>
+    </div>
+
+    <div class="demo">
+        <h1>d-flex flex-column</h1>
+        <div class="d-flex flex-column vh-50">
+            <div class="box "></div>
+            <div class="box mt-auto"></div>
+            <div class="box "></div>
+        </div>
+    </div>
+
+    <div class="demo">
+        <h1>overflow-auto , overflow-scroll</h1>
+        <div class="">
+            <div class="box "></div>
+            <div class="box overflow-auto">我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊</div>
+            <div class="box overflow-scroll">我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊
+            </div>
+        </div>
+    </div>
+
+    <div class="demo">
+        <h1>滑動選單 text-nowrap overflow-auto</h1>
+        <ul class="list-unstyled d-flex justify-content-between overflow-auto flex-nowrap">
+            <li class="text-success p-3 text-nowrap">選單</li>
+            <li class="text-success p-3 text-nowrap">選單</li>
+            <li class="text-success p-3 text-nowrap">選單</li>
+            <li class="text-success p-3 text-nowrap">選單</li>
+            <li class="text-success p-3 text-nowrap">選單</li>
+            <li class="text-success p-3 text-nowrap">選單</li>
+            <li class="text-success p-3 text-nowrap">選單</li>
+            <li class="text-success p-3 text-nowrap">選單</li>
+            <li class="text-success p-3 text-nowrap">選單</li>
+            <li class="text-success p-3 text-nowrap">選單</li>
+        </ul>
+    </div>
+
+    <div class="demo">
+        <div style="height: 400px;" class="position-relative">
+            <div class="box  position-absolute start-50 translate-middle-x">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="demo">
+        <div style="height: 400px;" class="position-relative">
+            <div class="box  position-absolute top-50 translate-middle-y">
+            </div>
+        </div>
+    </div>
+
+    <div class="demo">
+        <div style="height: 400px;" class="position-relative">
+            <div class="box  position-absolute start-50 bottom-0 translate-middle-x">
+            </div>
+        </div>
+    </div>
+
+    <div class="demo">
+        <div style="height: 400px;" class="position-relative">
+            <div class="box  position-absolute top-50 end-0 translate-middle-y">
+            </div>
+        </div>
+    </div>
+
+    <div class="demo01">
+        <div style="height: 600px; width: 600px;" class="position-relative">
+            <div class="box01 position-absolute top-0 start-0"></div>
+            <div class="box01 position-absolute top-0 start-50"></div>
+            <div class="box01 position-absolute top-0 start-100"></div>
+            <div class="box01 position-absolute top-50"></div>
+            <div class="box01 position-absolute top-50 start-50"></div>
+            <div class="box01 position-absolute top-50 start-100"></div>
+            <div class="box01 position-absolute top-100"></div>
+            <div class="box01 position-absolute top-100 start-50"></div>
+            <div class="box01 position-absolute top-100 start-100"></div>
+        </div>
+    </div>
+
+    <div class="demo" style="height: 400px; background-color: #fff;border: #fff;">
+
+    </div>
+
+    <div class="demo01">
+        <div style="height: 600px; width: 600px;" class="position-relative">
+            <div class="box01 position-absolute top-0 start-0 translate-middle"></div>
+            <div class="box01 position-absolute top-0 start-50 translate-middle"></div>
+            <div class="box01 position-absolute top-0 start-100 translate-middle "></div>
+            <div class="box01 position-absolute top-50 translate-middle"></div>
+            <div class="box01 position-absolute top-50 start-50 translate-middle"></div>
+            <div class="box01 position-absolute top-50 start-100 translate-middle"></div>
+            <div class="box01 position-absolute top-100 translate-middle"></div>
+            <div class="box01 position-absolute top-100 start-50 translate-middle"></div>
+            <div class="box01 position-absolute top-100 start-100 translate-middle"></div>
+        </div>
+    </div>
+
+    <div class="demo" style="height: 100px; background-color: #fff;border: #fff;">
+    </div>
+
+
+    <button type="button" class="btn btn-primary position-relative" id="bouu">
+        Mails
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="r99">10
+        </span>
+    </button>
+
+    <br>
+    <br>
+
+    <button type="button" class="btn btn-primary position-relative" id="bou">
+        Alerts <span
+            class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2"
+            id="redd"><span class="visually-hidden"></span></span>
+    </button>
+
+    <br>
+    <br>
+
+    <div class="position-relative m-4 mt-5">
+        <div class="progress" style="height: 1px;">
+            <div class="progress-bar" role="progressbar" aria-label="Progress" style="width: 100%;" aria-valuenow="50"
+                aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <button type="button"
+            class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill"
+            style="width: 2rem; height:2rem;">1</button>
+        <button type="button"
+            class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill"
+            style="width: 2rem; height:2rem;">2</button>
+        <button type="button"
+            class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-primary rounded-pill"
+            style="width: 2rem; height:2rem;">3</button>
+    </div>
+
+    <style>
+        .p2 {
+            left: 25%;
+        }
+
+        .p4 {
+            left: 75%;
+        }
+    </style>
+
+    <div class="position-relative m-4 mt-5">
+        <div class="progress" style="height: 1px;">
+            <div class="progress-bar" role="progressbar" aria-label="Progress" style="width: 100%;" aria-valuenow="50"
+                aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <button type="button"
+            class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill"
+            style="width: 2rem; height:2rem;">1</button>
+        <button type="button" class="p2 position-absolute top-0  translate-middle btn btn-sm btn-primary rounded-pill"
+            style="width: 2rem; height:2rem;">2</button>
+        <button type="button"
+            class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill"
+            style="width: 2rem; height:2rem;">3</button>
+        <button type="button" class="p4 position-absolute top-0  translate-middle btn btn-sm btn-primary rounded-pill"
+            style="width: 2rem; height:2rem;">4</button>
+        <button type="button"
+            class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-primary rounded-pill"
+            style="width: 2rem; height:2rem;">5</button>
+    </div>
+
+    <div class="row">
+        <div class="col-8">
+
+            <div class="demo sticky-top">
+
+                <!-- <ul class="list-group">
+                    <li class="text-ingo list-group-item">我ㄉ老天ㄚ</li>
+                    <li class="text-ingo list-group-item">我ㄉ老天ㄚ</li>
+                    <li class="text-ingo list-group-item">我ㄉ老天ㄚ</li>
+                    <li class="text-ingo list-group-item">我ㄉ老天ㄚ</li>
+                    <li class="text-ingo list-group-item">我ㄉ老天ㄚ</li>
+                </ul> -->
+
+                <a href="" class="btn btn-outline-success d-block">詐騙</a>
+
+            </div>
+
+            <div>
+                <h1>老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老
+                </h1>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
 </body>
-    <script src="js/jquery-3.6.1.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/jquery-3.6.1.min.js"></script>
 
-    <script>
-        var x = [];
+<script>
 
-        x[0] = 1;
-        x[1] = 2;
+    $(function () {
 
-        console.log(x[0]+" "+x[1]);
+        $("#bou").click(function () {
 
-        console.log(878787);
-    </script>
+
+            if ($("#redd").children()[0] == undefined) {
+
+                $("#redd").append(
+                    '<span class="visually-hidden" >unread messages</span>'
+                );
+                return;
+
+            } else {
+
+                $("#redd").empty();
+            }
+
+        });
+
+
+        $("#bouu").click(function () {
+            var gg = parseInt($("#r99").text());
+            $("#r99").text(gg + 1);
+        });
+    });
+
+</script>
+
 </html>

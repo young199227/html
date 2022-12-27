@@ -5,317 +5,287 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/mycolor.css">
 
     <style>
         .demo {
-            padding: 10px;
-            margin-top: 10px;
-            background-color: rgb(255, 218, 171);
-            border: 2px solid #000;
+            background-color: rgb(196, 196, 196);
+            padding: 15px;
+        }
+
+        .demo2 {
+            padding: 15px;
         }
 
         .box {
             width: 150px;
             height: 150px;
-            background-color: aquamarine;
-            border: 2px solid #000;
-            margin: 10px;
-
-            display: inline-block;
-        }
-
-        .demo01 {
-            height: 600px;
-            width: 600px;
-            margin-top: 10px;
-            background-color: rgb(255, 218, 171);
-            border: 2px solid #000;
-        }
-
-        .box01 {
-            width: 150px;
-            height: 150px;
-            background-color: aquamarine;
-            border: 2px solid #000;
-
-
-            display: inline-block;
+            background-color: rgb(223, 132, 132);
         }
     </style>
-
+    <title>Document</title>
 </head>
 
 <body>
 
     <div class="demo">
-        <h1>border上下左右top,bottom,start,end</h1>
-        <div class="box border-top"></div>
-        <div class="box border-bottom"></div>
-        <div class="box border-start"></div>
-        <div class="box border-end"></div>
-    </div>
 
-    <div class="demo">
-        <h1>增加移除border-0框線&&修改顏色border-primary</h1>
-        <div class="box border-0"></div>
-        <div class="box border-top-0"></div>
-        <div class="box "></div>
-        <div class="box border-primary"></div>
-    </div>
+        <div class="row mb-3">
 
-    <div class="demo">
-        <h1>border圓角rounded</h1>
-        <div class="box border-3 rounded"></div>
-        <div class="box "></div>
-        <div class="box "></div>
-        <div class="box "></div>
-    </div>
-
-    <div class="demo">
-        <h1 class="text">甲文產生器</h1>
-        <h1 class="text-white">甲文產生器</h1>
-        <h1 class="text-bg-dark p-3">甲文產生器</h1>
-    </div>
-
-    <div class="demo">
-        <h1>按鈕製作 div直接撐開 d-inline 限制大小</h1>
-        <div class="text-bg-success p-2 d-inline rounded">123</div>
-        <div class="text-bg-warning p-2 d-inline rounded">321</div>
-    </div>
-
-    <div class="demo">
-        <h1>span跟著字大小 d-block 縮小</h1>
-        <span class="text-bg-success p-2 d-block rounded">123</span>
-    </div>
-
-    <div class="demo">
-        <h1>d-flex flex-column</h1>
-        <div class="d-flex flex-column vh-50">
-            <div class="box "></div>
-            <div class="box mt-auto"></div>
-            <div class="box "></div>
-        </div>
-    </div>
-
-    <div class="demo">
-        <h1>overflow-auto , overflow-scroll</h1>
-        <div class="">
-            <div class="box "></div>
-            <div class="box overflow-auto">我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊</div>
-            <div class="box overflow-scroll">我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊我ㄉ老天啊
-            </div>
-        </div>
-    </div>
-
-    <div class="demo">
-        <h1>滑動選單 text-nowrap overflow-auto</h1>
-        <ul class="list-unstyled d-flex justify-content-between overflow-auto flex-nowrap">
-            <li class="text-success p-3 text-nowrap">選單</li>
-            <li class="text-success p-3 text-nowrap">選單</li>
-            <li class="text-success p-3 text-nowrap">選單</li>
-            <li class="text-success p-3 text-nowrap">選單</li>
-            <li class="text-success p-3 text-nowrap">選單</li>
-            <li class="text-success p-3 text-nowrap">選單</li>
-            <li class="text-success p-3 text-nowrap">選單</li>
-            <li class="text-success p-3 text-nowrap">選單</li>
-            <li class="text-success p-3 text-nowrap">選單</li>
-            <li class="text-success p-3 text-nowrap">選單</li>
-        </ul>
-    </div>
-
-    <div class="demo">
-        <div style="height: 400px;" class="position-relative">
-            <div class="box  position-absolute start-50 translate-middle-x">
-            </div>
-        </div>
-    </div>
-
-
-    <div class="demo">
-        <div style="height: 400px;" class="position-relative">
-            <div class="box  position-absolute top-50 translate-middle-y">
-            </div>
-        </div>
-    </div>
-
-    <div class="demo">
-        <div style="height: 400px;" class="position-relative">
-            <div class="box  position-absolute start-50 bottom-0 translate-middle-x">
-            </div>
-        </div>
-    </div>
-
-    <div class="demo">
-        <div style="height: 400px;" class="position-relative">
-            <div class="box  position-absolute top-50 end-0 translate-middle-y">
-            </div>
-        </div>
-    </div>
-
-    <div class="demo01">
-        <div style="height: 600px; width: 600px;" class="position-relative">
-            <div class="box01 position-absolute top-0 start-0"></div>
-            <div class="box01 position-absolute top-0 start-50"></div>
-            <div class="box01 position-absolute top-0 start-100"></div>
-            <div class="box01 position-absolute top-50"></div>
-            <div class="box01 position-absolute top-50 start-50"></div>
-            <div class="box01 position-absolute top-50 start-100"></div>
-            <div class="box01 position-absolute top-100"></div>
-            <div class="box01 position-absolute top-100 start-50"></div>
-            <div class="box01 position-absolute top-100 start-100"></div>
-        </div>
-    </div>
-
-    <div class="demo" style="height: 400px; background-color: #fff;border: #fff;">
-
-    </div>
-
-    <div class="demo01">
-        <div style="height: 600px; width: 600px;" class="position-relative">
-            <div class="box01 position-absolute top-0 start-0 translate-middle"></div>
-            <div class="box01 position-absolute top-0 start-50 translate-middle"></div>
-            <div class="box01 position-absolute top-0 start-100 translate-middle "></div>
-            <div class="box01 position-absolute top-50 translate-middle"></div>
-            <div class="box01 position-absolute top-50 start-50 translate-middle"></div>
-            <div class="box01 position-absolute top-50 start-100 translate-middle"></div>
-            <div class="box01 position-absolute top-100 translate-middle"></div>
-            <div class="box01 position-absolute top-100 start-50 translate-middle"></div>
-            <div class="box01 position-absolute top-100 start-100 translate-middle"></div>
-        </div>
-    </div>
-
-    <div class="demo" style="height: 100px; background-color: #fff;border: #fff;">
-    </div>
-
-
-    <button type="button" class="btn btn-primary position-relative" id="bouu">
-        Mails
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="r99">10
-        </span>
-    </button>
-
-    <br>
-    <br>
-
-    <button type="button" class="btn btn-primary position-relative" id="bou">
-        Alerts <span
-            class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2"
-            id="redd"><span class="visually-hidden"></span></span>
-    </button>
-
-    <br>
-    <br>
-
-    <div class="position-relative m-4 mt-5">
-        <div class="progress" style="height: 1px;">
-            <div class="progress-bar" role="progressbar" aria-label="Progress" style="width: 100%;" aria-valuenow="50"
-                aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <button type="button"
-            class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill"
-            style="width: 2rem; height:2rem;">1</button>
-        <button type="button"
-            class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill"
-            style="width: 2rem; height:2rem;">2</button>
-        <button type="button"
-            class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-primary rounded-pill"
-            style="width: 2rem; height:2rem;">3</button>
-    </div>
-
-    <style>
-        .p2 {
-            left: 25%;
-        }
-
-        .p4 {
-            left: 75%;
-        }
-    </style>
-
-    <div class="position-relative m-4 mt-5">
-        <div class="progress" style="height: 1px;">
-            <div class="progress-bar" role="progressbar" aria-label="Progress" style="width: 100%;" aria-valuenow="50"
-                aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <button type="button"
-            class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill"
-            style="width: 2rem; height:2rem;">1</button>
-        <button type="button" class="p2 position-absolute top-0  translate-middle btn btn-sm btn-primary rounded-pill"
-            style="width: 2rem; height:2rem;">2</button>
-        <button type="button"
-            class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill"
-            style="width: 2rem; height:2rem;">3</button>
-        <button type="button" class="p4 position-absolute top-0  translate-middle btn btn-sm btn-primary rounded-pill"
-            style="width: 2rem; height:2rem;">4</button>
-        <button type="button"
-            class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-primary rounded-pill"
-            style="width: 2rem; height:2rem;">5</button>
-    </div>
-
-    <div class="row">
-        <div class="col-8">
-
-            <div class="demo sticky-top">
-
-                <!-- <ul class="list-group">
-                    <li class="text-ingo list-group-item">我ㄉ老天ㄚ</li>
-                    <li class="text-ingo list-group-item">我ㄉ老天ㄚ</li>
-                    <li class="text-ingo list-group-item">我ㄉ老天ㄚ</li>
-                    <li class="text-ingo list-group-item">我ㄉ老天ㄚ</li>
-                    <li class="text-ingo list-group-item">我ㄉ老天ㄚ</li>
-                </ul> -->
-
-                <a href="" class="btn btn-outline-success d-block">詐騙</a>
-
+            <div class="mb-3">
+                <label for="username" class="form-label">帳號</label>
+                <input type="text" id="username" name="username" class="form-control">
+                <div class="form-text">阿達阿達</div>
             </div>
 
-            <div>
-                <h1>老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老天ㄚ我ㄉ老
-                </h1>
+            <div class="mb-3">
+                <label for="password" class="form-label">密碼</label>
+                <input type="text" id="password" name="password" class="form-control">
+                <div class="form-text">阿達阿達</div>
             </div>
+
+            <div class="text-center">
+                <button type="button" class="btn btn-secondary">X</button>
+                <button type="submit" class="btn btn-primary">Y</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="demo mt-3">
+
+        <div class="row align-content-center mt-3">
+
+            <div class="col-auto">
+                <label for="username" class="form-label">帳號</label>
+            </div>
+            <div class="col-auto">
+                <input type="text" id="username" name="username" class="form-control">
+            </div>
+            <div class="col-auto">
+                <div class="form-text">阿達阿達</div>
+            </div>
+        </div>
+
+        <div class="row align-content-center mt-3">
+            <div class="col-auto">
+                <label for="password" class="form-label">密碼</label>
+            </div>
+            <div class="col-auto">
+                <input type="text" id="password" name="password" class="form-control">
+            </div>
+            <div class="col-auto">
+                <div class="form-text">阿達阿達</div>
+
+            </div>
+        </div>
+
+        <div class="text-center mt-3">
+            <button type="button" class="btn btn-secondary">X</button>
+            <button type="submit" class="btn btn-primary">Y</button>
         </div>
     </div>
 
+    <div class="demo mt-3">
+        <label for="myfile" class="form-label">上傳</label>
+        <input type="file" id="myfile" name="myfile" class="form-control" multiple>
+        <div class="form-text">一堆圖片</div>
+
+    </div>
+
+    <div class="demo mt-3">
+        <select name="foodlist" id="foodlist">
+
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+
+    </div>
+
+    <div class="demo mt-3">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" name="check_food">
+            <label class="form-check-label" for="flexCheckDefault">
+                1
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="2" id="flexCheckChecked" checked name="check_food">
+            <label class="form-check-label" for="flexCheckChecked">
+                2
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="3" id="flexCheckDefault" name="check_food">
+            <label class="form-check-label" for="flexCheckDefault">
+                3
+            </label>
+        </div>
+        <button class="btn btn-dark" id="ok123">123</button>
+    </div>
 
 
+    <div class="demo mt-3 mb-3">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="1">
+            <label class="form-check-label" for="flexRadioDefault1">
+                1
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked
+                value="2">
+            <label class="form-check-label" for="flexRadioDefault2">
+                2
+            </label>
+        </div>
+        <button class="btn btn-dark" id="ok321">321</button>
+    </div>
 
+    <div class="demo mt-3 mb-3">
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        </div>
+    </div>
 
+    <div class="row demo2 mt-3 mb-3 w-50">
 
+        <div class="col-12 d-flex">
+            <label for="range" class="form-label">R</label>
+            <input type="range" id="range1" name="range" class="form-range" min="0" max="255" step="1">
+            <div class="form-text" id="red_text">???</div>
+        </div>
+
+        <div class="col-12 d-flex">
+            <label for="range" class="form-label">G</label>
+            <input type="range" id="range2" name="range" class="form-range" min="0" max="255" step="1">
+            <div class="form-text" id="red2_text">???</div>
+        </div>
+
+        <div class="col-12 d-flex">
+            <label for="range" class="form-label">B</label>
+            <input type="range" id="range3" name="range" class="form-range" min="0" max="255" step="1">
+            <div class="form-text" id="red3_text">???</div>
+        </div>
+
+        <div class="box"></div>
+    </div>
+
+    <div class="row demo2 mt-3 mb-3 w-50">
+
+        <div class="col-12 d-flex">
+            <label for="cm_range" class="form-label">身高</label>
+            <input type="range" id="cm_range" name="range" class="form-range" min="1" max="200" step="1">
+            <div class="form-text" id="cm_text">???</div>
+        </div>
+
+        <div class="col-12 d-flex">
+            <label for="kg_range" class="form-label">體重</label>
+            <input type="range" id="kg_range" name="range" class="form-range" min="1" max="150" step="1">
+            <div class="form-text" id="kg_text">???</div>
+        </div>
+
+        <div class="box2"></div>
+    </div>
 
 </body>
-<script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery-3.6.1.min.js"></script>
-
 <script>
 
     $(function () {
 
-        $("#bou").click(function () {
+        $("#foodlist").change(function () {
+
+            console.log($("#foodlist").val());
+        });
+
+        $("#ok123").click(function () {
+
+            var myfood = [];
+
+            $.each($("input[name='check_food']:checked"), function () {
+
+                myfood.push($(this).val());
+            });
+
+            console.log(myfood);
+        });
+
+        $("#ok321").click(function () {
+
+            var food321 = "";
+
+            $.each($("input[name='flexRadioDefault']:checked"), function () {
+
+                food321 = $(this).val();
+            });
+
+            console.log(food321);
+        });
+
+        $("#flexSwitchCheckDefault").click(function () {
+            console.log($("#flexSwitchCheckDefault").is(':checked'));
+        })
 
 
-            if ($("#redd").children()[0] == undefined) {
+        var rgb1 = 0;
+        var rgb2 = 0;
+        var rgb3 = 0;
 
-                $("#redd").append(
-                    '<span class="visually-hidden" >unread messages</span>'
-                );
-                return;
+        var cm = 0;
+        var kg = 0;
 
-            } else {
+        $("#range1").bind('input propertychange', function () {
 
-                $("#redd").empty();
-            }
+            rgb1 = $(this).val();
+            $("#red_text").text($(this).val());
+            $(".box").css("background-color", "rgb(" + rgb1 + ", " + rgb2 + ", " + rgb3 + ")");
+        });
 
+        $("#range2").bind('input propertychange', function () {
+
+            rgb2 = $(this).val();
+            $("#red2_text").text($(this).val());
+            $(".box").css("background-color", "rgb(" + rgb1 + ", " + rgb2 + ", " + rgb3 + ")");
+        });
+
+        $("#range3").bind('input propertychange', function () {
+
+            rgb3 = $(this).val();
+            $("#red3_text").text($(this).val());
+            $(".box").css("background-color", "rgb(" + rgb1 + ", " + rgb2 + ", " + rgb3 + ")");
         });
 
 
-        $("#bouu").click(function () {
-            var gg = parseInt($("#r99").text());
-            $("#r99").text(gg + 1);
-        });
+        $("#cm_range").bind('input propertychange', function () {
+
+            console.log($(this).val());
+            $("#cm_text").text($(this).val());
+
+
+            cm = (($(this).val() / 100) * ($(this).val() / 100));
+
+            $(".box2").text("BMI:"+(kg / cm).toFixed(2));
+        })
+
+        $("#kg_range").bind('input propertychange', function () {
+
+            console.log($(this).val());
+            $("#kg_text").text($(this).val());
+
+
+            kg = $(this).val();
+
+            $(".box2").text("BMI:"+(kg / cm).toFixed(2));
+        })
+
     });
+
 
 </script>
 

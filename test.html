@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,6 +26,7 @@
     </style>
     <title>Document</title>
 </head>
+
 <body>
 
     <div class="demo">
@@ -191,6 +193,63 @@
         <div class="box2"></div>
     </div>
 
+    <div class="demo">
+
+        <form action="" class="row">
+            <div class="col-6">
+                <label for="name">姓</label>
+                <input type="text" id="name" class="form-control is-invalid">
+                <div class="valid-feedback">!!</div>
+                <div class="invalid-feedback">錯誤!!!</div>
+            </div>
+
+            <div class="col-6">
+
+                <label for="name2">名</label>
+                <input type="text" id="name2" class="form-control is-valid">
+
+            </div>
+        </form>
+
+    </div>
+
+    <div class="demo mt-3">
+
+        <div class="form-floating">
+
+            <input type="text" class="form-control">
+            <label for="">姓名</label>
+        </div>
+
+    </div>
+
+
+    <div class="demo mt-3">
+
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <label for="" class="col-2 col-form-label">姓</label>
+                    <div class="col-8">
+                        <input type="text" id="" class="form-control">
+                    </div>
+                    
+                </div>
+                
+            </div>
+
+            <div class="col-6"></div>
+        </div>
+
+        <div class="row mt-2">
+            <label for="">信用卡號</label>
+            <div class="col-2"><input type="text" id="" class="form-control"></div>-
+            <div class="col-2"><input type="text" id="" class="form-control"></div>-
+            <div class="col-2"><input type="text" id="" class="form-control"></div>-
+            <div class="col-2"><input type="text" id="" class="form-control"></div>
+        </div>
+    </div>
+
 </body>
 <script src="/js/jquery-3.6.1.min.js"></script>
 <script>
@@ -268,7 +327,7 @@
 
             cm = (($(this).val() / 100) * ($(this).val() / 100));
 
-            $(".box2").text("BMI:"+(kg / cm).toFixed(2));
+            $(".box2").text("BMI:" + (kg / cm).toFixed(2));
         })
 
         $("#kg_range").bind('input propertychange', function () {
@@ -279,7 +338,7 @@
 
             kg = $(this).val();
 
-            $(".box2").text("BMI:"+(kg / cm).toFixed(2));
+            $(".box2").text("BMI:" + (kg / cm).toFixed(2));
         })
 
     });

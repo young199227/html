@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <title>Document</title>
+
+    <style>
+        .box {
+
+            width: 150px;
+            height: 150px;
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mt-3">
+                <div class="ggyy">
+                    <i class="fa-solid fa-heart-pulse fa-10x wow animate__heartBeat aaa" data-wow-duration="1s"
+                        data-wow-delay="0s" data-wow-iteration="infinite" style="color: brown;" id="aaa"></i>
+                </div>
+
+            </div>
+            <div class="col-md-6 mt-3">
+
+                <label for="customRange3" class="form-label" id="ggg">Example range</label>
+                <input type="range" class="form-range" min="0" max="2" step="0.1" id="eee">
+
+                <div class="box animate__animated animate__flip"></div>
+                <div class="box animate__animated animate__flip"></div>
+
+                
+                <lord-icon
+                src="https://cdn.lordicon.com/ggihhudh.json"
+                trigger="loop"
+                delay="2000"
+                style="width:250px;height:250px">
+            </lord-icon>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="/js/jquery-3.6.1.min.js"></script>
+<script src="https://cdn.lordicon.com/fudrjiwc.js"></script>
+
+<script>
+
+    new WOW().init();
+
+    $(function () {
+
+        $("#aaa").click(function () {
+
+            // console.log($("#aaa").attr("data-wow-duration"));
+
+            $("#aaa").attr("data-wow-duration", "2s");
+        });
+
+        $("#eee").bind('input propertychange', function () {
+
+            $("#ggg").text($("#eee").val() + "s");
+
+            // $(".ggyy").empty();
+
+            $(".ggyy").html(
+                '<i class="fa-solid fa-heart-pulse fa-10x wow animate__heartBeat aaa" data-wow-duration="' + $("#eee").val() + 's" data-wow-delay="0s" data-wow-iteration="infinite" style="color: brown;" id="aaa">' + '</i>'
+
+            );
+
+
+
+
+
+        });
+
+
+
+
+    });
+
+
+
+</script>
+
+</html>

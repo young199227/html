@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-3">
+
+                <div class="card">
+
+                    <div class="row" id="show">
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/jquery-3.6.1.min.js"></script>
+
+<script>
+
+    $(function () {
+
+        $.ajax({
+            url: 'https://randomuser.me/api/?results=10',
+            dataType: 'json',
+            success: function (data) {
+
+
+                for (i = 0; i < data.results.length; i++) {
+
+                    if (data.results[i].name.title == "Mrs" &&  data.results[i].dob.age >= 40) {
+
+                        console.log(data.results[i].dob.age);
+
+                        $("#show").append(
+
+                            '<div class="col-md-2 mb-3 p-3">' +
+                            '<img src="' + data.results[i].picture.large + '" class="img-fluid rounded w-100" alt="">' +
+                            '</div>' +
+                            '<div class="col-md-4">' +
+                            '<div class="card-body">' +
+                            '<div class="card-title">' +
+                            data.results[i].name.first + data.results[i].name.last +
+                            '</div>' +
+                            '<div class="card-text">' +
+                            'country: ' + data.results[i].country +
+                            '</br> phone: ' + data.results[i].phone +
+                            '</br> city: ' + data.results[i].city + '</div>' +
+                            '<button class="btn btn-danger mt-1">地方的媽媽</button>' +
+                            '</div>' +
+                            '</div>'
+                        );
+
+                        continue;
+                    }
+
+                    $("#show").append(
+
+                        '<div class="col-md-2 mb-3 p-3">' +
+                        '<img src="' + data.results[i].picture.large + '" class="img-fluid rounded w-100" alt="">' +
+                        '</div>' +
+                        '<div class="col-md-4">' +
+                        '<div class="card-body">' +
+                        '<div class="card-title">' +
+                        data.results[i].name.first + data.results[i].name.last +
+                        '</div>' +
+                        '<div class="card-text">' +
+                        'country: ' + data.results[i].country +
+                        '</br> phone: ' + data.results[i].phone +
+                        '</br> city: ' + data.results[i].city + '</div>' +
+                        '<button class="btn btn-primary mt-1">++好友</button>' +
+                        '</div>' +
+                        '</div>'
+                    );
+
+                }
+
+            }
+        });
+    });
+
+</script>
+
+</html>

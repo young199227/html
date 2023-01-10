@@ -335,7 +335,7 @@
                         <div class="col-6">
                             <label for="name">姓</label>
                             <input type="text" id="name" class="form-control is-invalid">
-                           
+
                             <div class="invalid-feedback">錯誤!!!</div>
                         </div>
 
@@ -397,7 +397,7 @@
     </section>
 
 
-    <!-- Modal -->
+    <!-- 會員登入Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -423,6 +423,8 @@
         </div>
     </div>
 
+
+    <!-- 會員註冊Modal -->
     <div class="modal fade" id="example2Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -443,7 +445,7 @@
                             <div class="fs-5">我ㄉ老天R我ㄉ老天R我ㄉ老天R</div>
 
                             <span class="d-flex justify-content-center">
-                                <input type="checkbox" name="imok" id="imok">
+                                <input type="checkbox" name="imok" id="imok" checked>
                                 <label for="imok">我同意</label>
                             </span>
 
@@ -452,13 +454,16 @@
                         <div class="col-6">
 
                             <label for="">email:</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" id="email">
+                            <div class="form-text" id="error_email">阿達阿達</div>
 
-                            <label for="" class="mt-2">password:</label>
-                            <input type="text" class="form-control">
+                            <label for="" class="mt-2">密碼</label>
+                            <input type="password" class="form-control" id="password">
+                            <div class="form-text" id="error_password">阿達阿達</div>
 
-                            <label for="" class="mt-2">password:</label>
-                            <input type="text" class="form-control mb-2">
+                            <label for="" class="mt-2">確認密碼</label>
+                            <input type="password" class="form-control mb-2" id="checkpassword">
+                            <div class="form-text" id="error_checkpassword">阿達阿達</div>
 
                         </div>
 
@@ -468,7 +473,7 @@
                 <div class="modal-footer">
                     <a href="" class="me-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">我有帳號!</a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary">登入</button>
+                    <button type="button" class="btn btn-primary" id="register">註冊</button>
                 </div>
             </div>
         </div>
@@ -477,5 +482,148 @@
 </body>
 
 <script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/jquery-3.6.1.min.js"></script>
+
+<script>
+
+    var flag_email = false;
+    var flag_password = false;
+
+    $(function () {
+
+        // $("#imok").click(function(){
+        //     console.log($("#imok").prop("checked"));
+        // });
+
+        //註冊會員按鈕
+        $("#register").click(function () {
+
+            if ($("#imok").prop("checked")) {
+
+                if (flag_email&&flag_password) {
+
+                    var dataJson = {};
+
+                    dataJson["username"] = $("#email").val();
+                    dataJson["password"] = $("#password").val();
+                    dataJson["email"] = $("#email").val();
+
+                    //console.log(JSON.stringify(dataJson));
+
+                    $.ajax({
+
+                        type: "post",
+                        url: "select_member.php",
+                        data: JSON.stringify(dataJson),
+                        dataType: "json",
+                        contentType: "application/json;chartset=utf-8",
+                        success: function (data) {
+
+                            alert(data.message);
+                            window.location.reload();
+                        },
+                        error: function () {
+                            console.log("ajax新增失敗");
+                        }
+
+                    });
+
+                } else {
+
+                    alert("輸入格式有誤");
+                }
+
+            } else {
+
+                alert("請勾選我同意");
+            }
+
+        });
+
+
+        //email監聽
+        $("#email").bind('input propertychange', function () {
+
+            if ($("#email").val() != "") {
+
+                $("#error_email").text("正確");
+                $("#error_email").css("color", "green");
+                flag_email = true;
+
+            } else {
+
+                $("#error_email").text("空空");
+                $("#error_email").css("color", "red");
+                flag_email = false;
+            }
+        });
+
+        //password監聽
+        $("#password").bind('input propertychange', function () {
+
+            if ($("#password").val() == $("#checkpassword").val()) {
+
+                if ($("#password").val().length >= 2 && $("#password").val().length <= 8) {
+                    $("#error_password").text("正確");
+                    $("#error_password").css("color", "green");
+                    $("#error_checkpassword").text("正確");
+                    $("#error_checkpassword").css("color", "green");
+                    flag_password = true;
+
+                } else {
+
+                    $("#error_password").text("2-8位數");
+                    $("#error_password").css("color", "red");
+                    $("#error_checkpassword").text("2-8位數");
+                    $("#error_checkpassword").css("color", "red");
+                    flag_password = false;
+                }
+
+            } else {
+                $("#error_password").text("確認密碼要一致");
+                $("#error_password").css("color", "red");
+                $("#error_checkpassword").text("密碼不一致");
+                $("#error_checkpassword").css("color", "red");
+                flag_password = false;
+            }
+
+        });
+
+        //checkpassword監聽
+        $("#checkpassword").bind('input propertychange', function () {
+
+            if ($("#checkpassword").val() == $("#password").val()) {
+
+                if ($("#password").val().length >= 2 && $("#password").val().length <= 8) {
+
+                    $("#error_checkpassword").text("正確");
+                    $("#error_checkpassword").css("color", "green");
+                    $("#error_password").text("正確");
+                    $("#error_password").css("color", "green");
+                    flag_password = true;
+                } else {
+
+                    $("#error_password").text("2-8位數");
+                    $("#error_password").css("color", "red");
+                    $("#error_checkpassword").text("2-8位數");
+                    $("#error_checkpassword").css("color", "red");
+                    flag_password = false;
+                }
+
+            } else {
+
+                $("#error_password").text("確認密碼要一致");
+                $("#error_password").css("color", "red");
+                $("#error_checkpassword").text("密碼不一致");
+                $("#error_checkpassword").css("color", "red");
+                flag_password = false;
+            }
+
+        });
+
+    });
+
+</script>
+
 
 </html>

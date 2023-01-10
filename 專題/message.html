@@ -212,7 +212,7 @@
     function ajaxGte() {
         $.ajax({
             type: "GET",
-            url: "/php/gethint.php",
+            url: "php/gethint.php",
             success: function (data) {
 
                 $(".box2").html(data);
@@ -239,7 +239,7 @@
     function countadd() {
         $.ajax({
             type: "GET",
-            url: "/php/gethint.php",
+            url: "php/gethint.php",
             success: function (data) {
 
                 count = data.length;
@@ -253,7 +253,7 @@
 
         $.ajax({
             type: "GEt",
-            url: "/php/insert.php",
+            url: "php/insert.php",
             data: "dept_name=" + $("#addmes").val(),
             success: ajaxGte
         });
@@ -269,7 +269,7 @@
     function deletemessage(){
         $.ajax({
             type:"GET",
-            url:"/php/delete.php",
+            url:"php/delete.php",
             success:function(){
                 ajaxGte();
             }

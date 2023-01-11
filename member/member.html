@@ -451,18 +451,20 @@
 
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-6 ">
 
                             <label for="">email:</label>
-                            <input type="text" class="form-control" id="email">
-                            <div class="form-text" id="error_email">阿達阿達</div>
+                            <input type="text" class="form-control" id="email" required>
+                            <div class="valid-feedback">帳號可以使用</div>
+                            <div class="invalid-feedback" id="email_error">規格錯誤或帳號重複</div>
+                            <!-- <div class="form-text" id="error_email">阿達阿達</div> -->
 
                             <label for="" class="mt-2">密碼</label>
-                            <input type="password" class="form-control" id="password">
+                            <input type="password" class="form-control" id="password" required>
                             <div class="form-text" id="error_password">阿達阿達</div>
 
                             <label for="" class="mt-2">確認密碼</label>
-                            <input type="password" class="form-control mb-2" id="checkpassword">
+                            <input type="password" class="form-control mb-2" id="checkpassword" required>
                             <div class="form-text" id="error_checkpassword">阿達阿達</div>
 
                         </div>
@@ -500,7 +502,7 @@
 
             if ($("#imok").prop("checked")) {
 
-                if (flag_email&&flag_password) {
+                if (flag_email && flag_password) {
 
                     var dataJson = {};
 
@@ -513,7 +515,7 @@
                     $.ajax({
 
                         type: "post",
-                        url: "select_member.php",
+                        url: "insert_member.php",
                         data: JSON.stringify(dataJson),
                         dataType: "json",
                         contentType: "application/json;chartset=utf-8",
@@ -530,7 +532,7 @@
 
                 } else {
 
-                    alert("輸入格式有誤");
+                    alert("格式錯誤");
                 }
 
             } else {
@@ -544,16 +546,48 @@
         //email監聽
         $("#email").bind('input propertychange', function () {
 
+
             if ($("#email").val() != "") {
 
-                $("#error_email").text("正確");
-                $("#error_email").css("color", "green");
-                flag_email = true;
+                var dataJson = {};
+
+                dataJson["email"] = $("#email").val();
+
+                $.ajax({
+                    type: "post",
+                    url: "select_member.php",
+                    data: JSON.stringify(dataJson),
+                    dataType: "json",
+                    success: function (data) {
+
+                        if (data.state) {
+
+                            $("#email").removeClass("is-invalid").addClass("is-valid");
+                            flag_email = true;
+
+                        } else {
+                            $("#email_error").text("帳號重複");
+                            $("#email").removeClass("is-valid").addClass("is-invalid");
+                            flag_email = false;
+
+                        }
+
+                    },
+                    error: function () {
+                        console.log("ajax失敗");
+                    }
+
+                });
+
+                // $("#error_email").text("正確");
+                // $("#error_email").css("color", "green");
 
             } else {
 
-                $("#error_email").text("空空");
-                $("#error_email").css("color", "red");
+                // $("#error_email").text("空空");
+                // $("#error_email").css("color", "red");
+                $("#email_error").text("帳號格式錯誤");
+                $("#email").removeClass("is-valid").addClass("is-invalid");
                 flag_email = false;
             }
         });

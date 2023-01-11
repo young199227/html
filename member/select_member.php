@@ -2,7 +2,7 @@
 
     //postman測試
     //http://www.tcnr07.com/member/select_member.php
-    //{"username":"owner","password":"123456","email":"ggyy@gmail.com"}
+    //{"email":"ggyy@gmail.com"}
 
     $data = file_get_contents("php://input","r");
 
@@ -10,14 +10,11 @@
 
     $jsonData = json_decode($data, true);
 
-    if(isset($jsonData["username"])&&isset($jsonData["password"])&&isset($jsonData["email"])){
+    if(isset($jsonData["email"])){
 
-        if($jsonData["username"]!=""&&$jsonData["password"]!=""&&$jsonData["email"]!=""){
+        if($jsonData["email"]!=""){
 
 
-
-            $m_Username = $jsonData["username"];
-            $m_Password = $jsonData["password"];
             $m_Email = $jsonData["email"];
 
             $conn = mysqli_connect("localhost","owner","123456","testdb");
@@ -26,36 +23,37 @@
                 die("連線錯誤".mysqli_connect_error());
             }
 
-            //密碼加密
-            $pas = substr(md5($m_Password),10,8);
 
-            $hsah_Password = password_hash($pas,PASSWORD_DEFAULT);
-
-
-            $sql = "INSERT INTO member(Username,Password,Email)VALUES('$m_Username','$hsah_Password','$m_Email')";
+            $sql = "SELECT Email FROM member WHERE Email = '$m_Email'";
 
             $result = mysqli_query($conn,$sql);
 
-            if($result){
+            if (mysqli_num_rows($result) > 0) {
+                
+                while($row = mysqli_fetch_assoc($result)) {
 
-                echo '{"state":"true","message":"註冊成功"}';
-            }else{
-    
-                echo '{"state":"false","message":"新增資料失敗"'.$sql.mysqli_error($conn).'}';
+
+                    if($row["Email"]==$m_Email){
+
+                        echo '{"state":false,"message":"帳號已存在,不可使用"}';
+                        return;
+                    }
+
+                }
+
+            } else {
+                echo '{"state":true,"message":"帳號可以使用"}';
             }
 
             mysqli_close($conn);
 
         }else{
 
-            echo '{"state":"false","message":"欄位有空值新增失敗"}';
+            echo '{"state":false,"message":"欄位有空值"}';
         }
-
 
     }else{
 
-        echo '{"state":"false","message":"缺少欄位新增失敗"}';
+        echo '{"state":false,"message":"缺少欄位"}';
     }
-
-
 ?>
